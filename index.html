@@ -123,6 +123,7 @@
         .flex-row { display: flex; align-items: center; }
         .flex-between { display: flex; align-items: center; justify-content: space-between; }
         .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; }
+        .w-100 { width: 100%; }
 
         /* --- Glass Utilities --- */
         .glass-panel {
@@ -156,7 +157,6 @@
         
         .header-actions { display: flex; align-items: center; gap: 16px; }
 
-        /* Header Dropdown Specifics */
         .actions-dropdown-container { display: flex; position: relative; align-items: center; }
         .icon-actions-container { display: flex; flex-direction: row; gap: 8px; }
         .action-label { display: none; }
@@ -195,20 +195,18 @@
         .hero-content h2 { font-size: 3.5rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.04em; line-height: 1.1; }
         .hero-content h2 span { background: linear-gradient(135deg, var(--primary), #8B5CF6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero-content p { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 0;}
-        .hero-image { width: 100%; max-width: 400px; object-fit: contain; pointer-events: none; user-select: none; }
 
         .home-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
         .purple-card {
             background: linear-gradient(135deg, #7C3AED, #4F46E5); border-radius: var(--radius-lg); padding: 32px;
-            display: flex; align-items: center; gap: 24px; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease; text-decoration: none; border: 1px solid transparent;
+            display: flex; align-items: center; gap: 24px; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease; border: 1px solid transparent;
         }
         .purple-card:hover { background: linear-gradient(135deg, #6D28D9, #4338CA); transform: translateY(-2px); }
-        .purple-card img { width: 120px; height: 120px; object-fit: contain; flex-shrink: 0; }
         .purple-card-info { flex: 1; color: #ffffff; }
         .purple-card-info h3 { font-size: 1.5rem; color: #ffffff; margin-bottom: 8px; }
         .purple-card-info p { color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.4;}
         
-        .btn-white { background: #ffffff; color: var(--primary); font-weight: 700; padding: 10px 20px; border-radius: var(--radius-sm); border: none; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease; font-size: 0.9rem; }
+        .btn-white { background: #ffffff; color: var(--primary); font-weight: 700; padding: 10px 20px; border-radius: var(--radius-sm); border: none; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.9rem; }
         .btn-white:hover { background: #f3f4f6; }
 
         .home-dropzone { border: 2px dashed rgba(139, 92, 246, 0.4); border-radius: var(--radius-lg); padding: 48px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; background: var(--glass-bg); backdrop-filter: var(--glass-blur); transition: background-color 0.3s ease, border-color 0.3s ease; }
@@ -216,8 +214,7 @@
         .home-dropzone:hover { background: var(--glass-bg-hover); border-color: var(--primary); }
         .dropzone-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(139, 92, 246, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 8px; }
         .home-dropzone h3 { font-size: 1.25rem; font-weight: 700; margin: 0; }
-        .home-dropzone p { font-size: 0.9rem; margin: 0; }
-
+        
         .home-bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
         .list-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; gap: 20px; }
         .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;}
@@ -230,7 +227,6 @@
         .item-info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
         .item-info h4 { font-size: 0.95rem; margin: 0; font-weight: 600; }
         .item-info p { font-size: 0.8rem; margin: 0; }
-        .item-status { font-size: 0.75rem; font-weight: 600; color: var(--success); padding: 4px 10px; background: rgba(16,185,129,0.1); border-radius: var(--radius-full); }
         .action-arrow { color: var(--text-muted); transition: color 0.3s ease; }
         .list-item:hover .action-arrow { color: var(--text-main); }
 
@@ -240,7 +236,6 @@
             .hero-content h2 { font-size: 2.5rem; }
             .home-cards, .home-bottom-grid { grid-template-columns: 1fr; }
             .purple-card { padding: 20px; flex-direction: column; text-align: center; gap: 16px; }
-            .purple-card img { width: 80px; height: 80px; }
         }
 
         /* --- Editor View --- */
@@ -365,7 +360,7 @@
 
         /* Toasts */
         #toast-container { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 8px; pointer-events: none; width: 90%; max-width: 400px; }
-        .toast { padding: 16px 20px; border-radius: var(--radius-md); font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 12px; transform: translateY(-20px); opacity: 0; transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: auto; }
+        .toast { padding: 16px 20px; border-radius: var(--radius-md); font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 12px; transform: translateY(-20px); opacity: 0; transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: auto; background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); }
         .toast.show { opacity: 1; transform: translateY(0); }
         .toast-success i { color: var(--success); font-size: 24px;}
         .toast-error i { color: var(--error); font-size: 24px;}
@@ -629,7 +624,7 @@
         <!-- Hero Section -->
         <div class="home-hero">
             <div class="hero-content">
-                <span class="welcome-text">Connected to Supabase Cloud</span>
+                <span class="welcome-text">Connected to Firebase Cloud</span>
                 <h2>Perfect Prints. <br><span>Instant Magic.</span></h2>
                 <p>Format photos, verify compliance, and instantly backup all generated prints to cloud storage.</p>
             </div>
@@ -1215,41 +1210,31 @@
     import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, collection, addDoc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
     import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+    import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
 
-    let firebaseConfig;
-    let isPreviewEnv = false;
-    try {
-        firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        if (!firebaseConfig.apiKey) throw new Error('Use fallback');
-        isPreviewEnv = true;
-    } catch(e) {
-        // Your specific Firebase configuration
-        firebaseConfig = {
-            apiKey: "AIzaSyB-sUgyIHCGJ3KmQzSxYnZPFRzn7tg0ctY",
-            authDomain: "sandippal-portfolio.firebaseapp.com",
-            projectId: "sandippal-portfolio",
-            storageBucket: "sandippal-portfolio.firebasestorage.app",
-            messagingSenderId: "1085349609690",
-            appId: "1:1085349609690:web:3d14ea53d49324b9fde5e3",
-            measurementId: "G-QFMH3G7RLS"
-        };
-    }
+    // Your specific Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyB-sUgyIHCGJ3KmQzSxYnZPFRzn7tg0ctY",
+        authDomain: "sandippal-portfolio.firebaseapp.com",
+        projectId: "sandippal-portfolio",
+        storageBucket: "sandippal-portfolio.firebasestorage.app",
+        messagingSenderId: "1085349609690",
+        appId: "1:1085349609690:web:3d14ea53d49324b9fde5e3",
+        measurementId: "G-QFMH3G7RLS"
+    };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
     const storage = getStorage(app);
     
-    // Only initialize Analytics in production to prevent preview environment errors
+    // Safely load Analytics ONLY if the environment supports it
     let analytics = null;
-    if (!isPreviewEnv) {
-        try {
+    isSupported().then((supported) => {
+        if (supported) {
             analytics = getAnalytics(app);
-        } catch (err) {
-            console.warn("Analytics skipped:", err);
         }
-    }
+    }).catch(console.warn);
     
     const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
