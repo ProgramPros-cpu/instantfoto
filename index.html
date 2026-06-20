@@ -429,7 +429,7 @@
     <h2>Drop photo to import</h2>
 </div>
 
-<!-- SUPABASE AUTH GATEWAY -->
+<!-- FIREBASE AUTH GATEWAY -->
 <div class="modal-overlay active" id="auth-overlay">
     <div class="modal-card glass-panel" style="max-width: 400px; text-align: center;">
         <div class="brand" style="justify-content: center; margin-bottom: 24px;">
@@ -1208,46 +1208,71 @@
 </div>
 
 <!-- ============================================== -->
-<!-- 🚀 SUPABASE + NEXT.JS ARCHITECTURE LOGIC 🚀 -->
+<!-- 🚀 FIREBASE + NEXT.JS ARCHITECTURE LOGIC 🚀 -->
 <!-- ============================================== -->
 <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
 
-    const supabaseUrl = 'https://gcdruaqpglndcbyihzbq.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjZHJ1YXFwZ2xuZGNieWloemJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE5Njg2MTksImV4cCI6MjA5NzU0NDYxOX0.JlxCm50hdIZhNEVbMRHLFOoor5JK_ivZHOib2zLQDnM';
+    let firebaseConfig;
+    try {
+        firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+    } catch(e) {
+        // Fallback for external hosting - USER MUST FILL THESE IN if deployed outside Canvas
+        firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+    }
 
-    window.supabaseClient = createClient(supabaseUrl, supabaseKey);
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
     window.currentUser = null;
 
     window.handleAuth = async () => {
-        showLoader('Redirecting to Google...');
-        
-        const { error } = await window.supabaseClient.auth.signInWithOAuth({
-            provider: 'google',
-            options: {
-                redirectTo: window.location.origin
+        showLoader('Authenticating...');
+        try {
+            // Check if running inside Canvas environment (uses token or anon)
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else if (typeof __firebase_config !== 'undefined') {
+                await signInAnonymously(auth);
+            } else {
+                // Standard Google Login if hosted externally
+                const provider = new GoogleAuthProvider();
+                await signInWithPopup(auth, provider);
             }
-        });
-
-        if (error) {
-            hideLoader();
+        } catch (error) {
+            console.error("Auth error:", error);
             showToast(error.message, 'error');
+        } finally {
+            hideLoader();
         }
     };
 
     window.logout = async () => {
         showLoader('Logging out...');
-        await window.supabaseClient.auth.signOut();
+        await signOut(auth);
         window.location.reload();
     };
 
-    window.supabaseClient.auth.onAuthStateChange(async (event, session) => {
+    onAuthStateChanged(auth, async (user) => {
         const overlay = document.getElementById('auth-overlay');
-        if (session) {
-            window.currentUser = session.user;
-            document.getElementById('user-email-display').innerText = session.user.email;
+        if (user) {
+            window.currentUser = user;
+            document.getElementById('user-email-display').innerText = user.email || 'Cloud User';
             overlay.classList.remove('active');
-            await fetchLogsFromDB();
+            await window.fetchLogsFromDB();
         } else {
             window.currentUser = null;
             overlay.classList.add('active');
@@ -1257,20 +1282,26 @@
     window.fetchLogsFromDB = async () => {
         if (!window.currentUser) return;
         try {
-            const { data, error } = await window.supabaseClient
-                .from('print_logs')
-                .select('*')
-                .order('created_at', { ascending: false });
-                
-            if (data && !error) {
-                window.state.printLogs = data.map(log => ({
-                    id: log.id,
-                    date: new Date(log.created_at).toLocaleString(),
-                    revenue: log.revenue
-                }));
-                if (typeof updateDashboardStats === 'function') updateDashboardStats();
-            }
-        } catch (e) { console.error("DB Fetch Error:", e); }
+            const logsRef = collection(db, 'artifacts', appId, 'users', window.currentUser.uid, 'print_logs');
+            const snapshot = await getDocs(logsRef);
+            
+            const logs = [];
+            snapshot.forEach((doc) => {
+                logs.push({ id: doc.id, ...doc.data() });
+            });
+            
+            logs.sort((a, b) => b.created_at - a.created_at);
+
+            window.state.printLogs = logs.map(log => ({
+                id: log.id,
+                date: new Date(log.created_at).toLocaleString(),
+                revenue: log.revenue
+            }));
+            
+            if (typeof updateDashboardStats === 'function') updateDashboardStats();
+        } catch (e) { 
+            console.error("DB Fetch Error:", e); 
+        }
     };
 
     window.uploadToCloudStorage = async (blob, filename) => {
@@ -1278,23 +1309,40 @@
         try {
             showLoader('Uploading backup to cloud...');
             const safeName = filename.replace(/[^a-zA-Z0-9.\-_]/g, '');
-            const filePath = `${window.currentUser.id}/${Date.now()}_${safeName}`;
+            const filePath = `artifacts/${appId}/users/${window.currentUser.uid}/${Date.now()}_${safeName}`;
+            const storageRef = ref(storage, filePath);
             
-            const { error } = await window.supabaseClient.storage
-                .from('exports') 
-                .upload(filePath, blob, { contentType: blob.type, upsert: false });
+            await uploadBytes(storageRef, blob, { contentType: blob.type });
 
-            if (error) {
-                console.warn("Storage upload error (Bucket 'exports' missing or RLS):", error.message);
-                showToast("Downloaded locally, but cloud backup failed.", "warning");
-            } else {
-                showToast("Downloaded & Backed up to Cloud!", "success");
-            }
+            showToast("Downloaded & Backed up to Cloud!", "success");
         } catch (e) {
-            console.error(e);
+            console.error("Storage upload error:", e);
+            showToast("Downloaded locally, but cloud backup failed.", "warning");
         } finally {
             hideLoader();
         }
+    };
+    
+    // Exposed helper for Dashboard Database operations
+    window.insertLogDB = async (rev) => {
+        if (!window.currentUser) return;
+        try {
+            const logsRef = collection(db, 'artifacts', appId, 'users', window.currentUser.uid, 'print_logs');
+            await addDoc(logsRef, { revenue: rev, created_at: Date.now() });
+        } catch(e) { console.error("DB Insert Error:", e); }
+    };
+    
+    window.clearLogsDB = async () => {
+        if (!window.currentUser) return;
+        try {
+            const logsRef = collection(db, 'artifacts', appId, 'users', window.currentUser.uid, 'print_logs');
+            const snapshot = await getDocs(logsRef);
+            const deletePromises = [];
+            snapshot.forEach((document) => {
+                deletePromises.push(deleteDoc(document.ref));
+            });
+            await Promise.all(deletePromises);
+        } catch(e) { console.error("DB Delete Error:", e); }
     };
 </script>
 
@@ -1311,7 +1359,7 @@
         flipV: false,
         isProcessing: false,
         stagedPhotos: [],
-        printLogs: [], // Managed by Supabase
+        printLogs: [], // Managed by Firebase
         pricePerSheet: parseInt(localStorage.getItem('gov_pricePerSheet') || '499'),
         history: [],
         historyIndex: -1,
@@ -1556,7 +1604,7 @@
         if(type === 'print') triggerPrintUpdate();
     }
 
-    // Dashboard Logic (Supabase Integrations)
+    // Dashboard Logic (Firebase Integrations)
     function openDashboard() {
         document.getElementById('inp-price').value = state.pricePerSheet;
         updateDashboardStats();
@@ -1582,10 +1630,8 @@
         state.printLogs.unshift(newLog);
         updateDashboardStats();
 
-        if (window.currentUser && window.supabaseClient) {
-            try {
-                await window.supabaseClient.from('print_logs').insert([{ revenue: rev, user_id: window.currentUser.id }]);
-            } catch(e) { console.error(e); }
+        if (window.currentUser && window.insertLogDB) {
+            await window.insertLogDB(rev);
         }
     }
 
@@ -1593,8 +1639,8 @@
         if(confirm("CLEAR all print history? This cannot be undone.")) {
             state.printLogs = [];
             updateDashboardStats();
-            if (window.currentUser && window.supabaseClient) {
-                await window.supabaseClient.from('print_logs').delete().eq('user_id', window.currentUser.id);
+            if (window.currentUser && window.clearLogsDB) {
+                await window.clearLogsDB();
             }
         }
     }
