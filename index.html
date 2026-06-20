@@ -1215,19 +1215,24 @@
     import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, collection, addDoc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
     import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
 
     let firebaseConfig;
+    let isPreviewEnv = false;
     try {
         firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        if (!firebaseConfig.apiKey) throw new Error('Use fallback');
+        isPreviewEnv = true;
     } catch(e) {
-        // Fallback for external hosting - USER MUST FILL THESE IN if deployed outside Canvas
+        // Your specific Firebase configuration
         firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyB-sUgyIHCGJ3KmQzSxYnZPFRzn7tg0ctY",
+            authDomain: "sandippal-portfolio.firebaseapp.com",
+            projectId: "sandippal-portfolio",
+            storageBucket: "sandippal-portfolio.firebasestorage.app",
+            messagingSenderId: "1085349609690",
+            appId: "1:1085349609690:web:3d14ea53d49324b9fde5e3",
+            measurementId: "G-QFMH3G7RLS"
         };
     }
 
@@ -1235,6 +1240,17 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
     const storage = getStorage(app);
+    
+    // Only initialize Analytics in production to prevent preview environment errors
+    let analytics = null;
+    if (!isPreviewEnv) {
+        try {
+            analytics = getAnalytics(app);
+        } catch (err) {
+            console.warn("Analytics skipped:", err);
+        }
+    }
+    
     const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
     window.currentUser = null;
