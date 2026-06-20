@@ -168,16 +168,38 @@
         
         .header-actions { display: flex; align-items: center; gap: 16px; }
 
-        @media(max-width: 600px) {
-            .app-bar { padding: 0 8px; padding-top: env(safe-area-inset-top); }
+        /* Header Dropdown Specifics */
+        .actions-dropdown-container { display: flex; position: relative; align-items: center; }
+        .icon-actions-container { display: flex; flex-direction: row; gap: 8px; }
+        .action-label { display: none; }
+        .mobile-menu-toggle { display: none; }
+
+        @media(max-width: 768px) {
+            .app-bar { padding: 0 8px; padding-top: env(safe-area-inset-top); border-radius: 0; }
             .brand h1 { font-size: 1rem; gap: 4px; }
             .pro-badge { padding: 2px 4px; font-size: 0.55rem; }
             .header-actions { gap: 4px; }
             #icon-actions { gap: 2px; }
             .btn-icon { width: 32px; height: 32px; font-size: 18px; }
-            .profile-text { display: none !important; }
             .profile-container { padding-left: 4px !important; border-left: none !important; }
             .profile-container img { width: 32px; height: 32px; }
+            .app-bar .flex-column { display: none !important; }
+
+            /* Responsive Header Menu - SOLID BACKGROUND */
+            .mobile-menu-toggle { display: flex; }
+            .icon-actions-container {
+                position: absolute; top: calc(100% + 15px); right: 0;
+                flex-direction: column; gap: 4px; padding: 12px;
+                background: #ffffff; /* SOLID WHITE */
+                border: 1px solid var(--glass-border); border-radius: var(--radius-md); box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+                opacity: 0; visibility: hidden; pointer-events: none;
+                transition: opacity 0.2s ease, visibility 0.2s ease;
+                min-width: 200px; z-index: 1000;
+            }
+            body.dark .icon-actions-container { background: #161b22; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+            .icon-actions-container.show { opacity: 1; visibility: visible; pointer-events: auto; }
+            .icon-actions-container .btn-icon { width: 100%; border-radius: var(--radius-sm); justify-content: flex-start; padding: 10px 16px; height: auto; }
+            .action-label { display: inline-block; margin-left: 12px; font-size: 0.95rem; font-weight: 600; color: var(--text-main); }
         }
 
         /* --- Upload View (Home Screen) --- */
@@ -377,6 +399,37 @@
             .drag-handle { display: none !important; }
         }
 
+        /* Editor Overrides for Mobile Layout */
+        @media(max-width: 768px) {
+            .workspace-area { padding: 0; gap: 0; position: relative; overflow: hidden; }
+            .left-toolbar { border-radius: 0; margin-bottom: 0; padding: 8px; z-index: 10; background: var(--glass-bg); backdrop-filter: var(--glass-blur); }
+            .canvas-container { border-radius: 0; margin-bottom: 64px; }
+            
+            .right-panel {
+                position: absolute; bottom: 0; left: 0; right: 0; width: 100%;
+                height: calc(100% - 16px); max-height: 100%; /* Constrains the max size leaving space for the header */
+                border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+                border-top-left-radius: var(--radius-lg); border-top-right-radius: var(--radius-lg);
+                z-index: 100;
+                transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+                /* Default to collapsed */
+                transform: translateY(calc(100% - 64px)); 
+            }
+            body.dark .right-panel { box-shadow: 0 -10px 40px rgba(0,0,0,0.4); }
+            
+            /* 3-Level Drawer States using Relative Transforms */
+            .right-panel.drawer-collapsed { transform: translateY(calc(100% - 64px)); }
+            .right-panel.drawer-mid { transform: translateY(50%); }
+            .right-panel.drawer-full { transform: translateY(0); }
+            
+            .right-panel.dragging { transition: none; }
+
+            .export-bar { flex-direction: column; align-items: stretch; padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); gap: 16px; z-index: 20; position: relative; border-radius: 0;}
+            .export-settings { flex-direction: column; align-items: stretch; gap: 12px; }
+            #panel-title { font-size: 1rem; margin: 0; }
+        }
+
         /* --- Forms & Inputs (Glassy) --- */
         .input-group { margin-bottom: 20px; }
         .input-label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
@@ -426,11 +479,14 @@
         /* --- Modern Sliders --- */
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; height: 32px; margin: 0; cursor: pointer;}
         input[type=range]::-webkit-slider-runnable-track {
-            width: 100%; height: 6px; background: var(--glass-bg); border-radius: var(--radius-full); border: 1px solid var(--glass-border);
+            width: 100%; height: 6px; background: rgba(0, 0, 0, 0.15); border-radius: var(--radius-full);
+        }
+        body.dark input[type=range]::-webkit-slider-runnable-track {
+            background: rgba(255, 255, 255, 0.2);
         }
         input[type=range]::-webkit-slider-thumb {
             height: 20px; width: 20px; border-radius: 50%; background: var(--primary);
-            -webkit-appearance: none; margin-top: -8px; transition: background-color 0.1s;
+            -webkit-appearance: none; margin-top: -7px; transition: background-color 0.1s;
             box-shadow: 0 2px 6px rgba(0,0,0,0.2); border: 2px solid #fff;
         }
 
@@ -451,12 +507,14 @@
             width: 100%;
             height: 100%;
             display: block;
-            background-color: var(--glass-bg);
+            background-color: rgba(0, 0, 0, 0.15);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             cursor: pointer;
             transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
-            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15), 0px 3px 1px rgba(0, 0, 0, 0.06);
+        }
+        body.dark .switch {
+            background-color: rgba(255, 255, 255, 0.2);
         }
         .slider {
             width: 27px;
@@ -497,62 +555,6 @@
         }
         .export-settings { flex-grow: 1; display: flex; flex-direction: column; gap: 6px; }
         
-        /* Header Dropdown Specifics */
-        .actions-dropdown-container { display: flex; position: relative; align-items: center; }
-        .icon-actions-container { display: flex; flex-direction: row; gap: 8px; }
-        .action-label { display: none; }
-        .mobile-menu-toggle { display: none; }
-
-        @media(max-width: 768px) {
-            .app-bar, .export-bar { border-radius: 0; }
-            .workspace-area { padding: 0; gap: 0; position: relative; overflow: hidden; }
-            .left-toolbar { border-radius: 0; margin-bottom: 0; padding: 8px; z-index: 10; background: var(--glass-bg); backdrop-filter: var(--glass-blur); }
-            .canvas-container { border-radius: 0; margin-bottom: 64px; }
-            
-            /* Hide user text details on mobile to save space */
-            .app-bar .flex-column { display: none !important; }
-            
-            /* Responsive Header Menu */
-            .mobile-menu-toggle { display: flex; }
-            .icon-actions-container {
-                position: absolute; top: calc(100% + 15px); right: 0;
-                flex-direction: column; gap: 4px; padding: 12px;
-                background: #ffffff;
-                border: 1px solid var(--glass-border); border-radius: var(--radius-md); box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-                opacity: 0; visibility: hidden; pointer-events: none;
-                transition: opacity 0.2s ease, visibility 0.2s ease;
-                min-width: 200px; z-index: 1000;
-            }
-            body.dark .icon-actions-container { background: #161b22; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
-            .icon-actions-container.show { opacity: 1; visibility: visible; pointer-events: auto; }
-            .icon-actions-container .btn-icon { width: 100%; border-radius: var(--radius-sm); justify-content: flex-start; padding: 10px 16px; height: auto; }
-            .action-label { display: inline-block; margin-left: 12px; font-size: 0.95rem; font-weight: 600; color: var(--text-main); }
-            
-            .right-panel {
-                position: absolute; bottom: 0; left: 0; right: 0; width: 100%;
-                height: calc(100% - 16px); max-height: 100%; /* Constrains the max size leaving space for the header */
-                border-bottom-left-radius: 0; border-bottom-right-radius: 0;
-                border-top-left-radius: var(--radius-lg); border-top-right-radius: var(--radius-lg);
-                z-index: 100;
-                transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-                box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
-                /* Default to collapsed */
-                transform: translateY(calc(100% - 64px)); 
-            }
-            body.dark .right-panel { box-shadow: 0 -10px 40px rgba(0,0,0,0.4); }
-            
-            /* 3-Level Drawer States using Relative Transforms */
-            .right-panel.drawer-collapsed { transform: translateY(calc(100% - 64px)); }
-            .right-panel.drawer-mid { transform: translateY(50%); }
-            .right-panel.drawer-full { transform: translateY(0); }
-            
-            .right-panel.dragging { transition: none; }
-
-            .export-bar { flex-direction: column; align-items: stretch; padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); gap: 16px; z-index: 20; position: relative; }
-            .export-settings { flex-direction: column; align-items: stretch; gap: 12px; }
-            #panel-title { font-size: 1rem; margin: 0; }
-        }
-
         /* --- Modals --- */
         .modal-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
@@ -800,6 +802,15 @@
                             </svg>
                         </div>
                         <div class="desc"><label>Generate Print Sheet</label><span>Create A4/4x6 sheets with cut marks</span></div>
+                    </div>
+                    
+                    <div class="entry action-item" data-tags="improve enhance quality fix clear upscale" onclick="closeQuickActions(); if(document.getElementById('view-editor').style.display === 'flex') { switchTool('tune', null, 'Image Tuning'); autoEnhancePhoto(); } else { showToast('Upload an image first', 'error'); }">
+                        <div class="icon glass-panel">
+                            <svg fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                            </svg>
+                        </div>
+                        <div class="desc"><label>Smart Improve</label><span>Auto-enhance brightness & colors</span></div>
                     </div>
                 </div>
             </div>
@@ -1151,8 +1162,8 @@
                 </div>
 
                 <div class="grid-4 mt-4 pt-4" style="border-top: 1px solid var(--glass-border);">
-                    <button class="btn btn-glass" style="padding: 10px;" onclick="applyTransform('rotL')"><i class="ph-bold ph-rotate-left"></i></button>
-                    <button class="btn btn-glass" style="padding: 10px;" onclick="applyTransform('rotR')"><i class="ph-bold ph-rotate-right"></i></button>
+                    <button class="btn btn-glass" style="padding: 10px;" onclick="applyTransform('rotL')"><i class="ph-bold ph-arrow-counter-clockwise"></i></button>
+                    <button class="btn btn-glass" style="padding: 10px;" onclick="applyTransform('rotR')"><i class="ph-bold ph-arrow-clockwise"></i></button>
                     <button class="btn btn-glass" style="padding: 10px;" onclick="applyTransform('flipH')"><i class="ph-bold ph-arrows-left-right"></i></button>
                     <button class="btn btn-glass" style="padding: 10px;" onclick="applyTransform('flipV')"><i class="ph-bold ph-arrows-down-up"></i></button>
                 </div>
@@ -1189,6 +1200,7 @@
                 <div class="input-group mb-4">
                     <div class="flex-between mb-2">
                         <span class="text-sm font-semibold" style="color: var(--primary);"><i class="ph-fill ph-sparkle"></i> AI Outfit Swap</span>
+                        <button class="btn-view-all" onclick="aiImprovePrompt()" style="display: flex; align-items: center; gap: 4px; color: var(--primary); border-color: rgba(79, 70, 229, 0.3); background: rgba(79, 70, 229, 0.05);"><i class="ph-bold ph-magic-wand"></i> Improve</button>
                     </div>
                     <textarea id="inp-outfit" class="flat-input" style="min-height: 100px; resize: vertical;" placeholder="Describe new clothing (e.g., Professional navy blue suit with a white shirt and red tie)"></textarea>
                     <button class="btn btn-filled w-100 mt-3" onclick="aiOutfitSwap()">
@@ -1215,9 +1227,14 @@
 
             <!-- TUNE PANEL -->
             <div class="tool-panel" id="panel-tune">
-                <button class="btn btn-glass w-100 mb-4" onclick="autoEnhancePhoto()">
-                    <i class="ph-bold ph-sparkle"></i> Auto Enhance Photo
-                </button>
+                <div class="grid-2 mb-4">
+                    <button class="btn btn-filled" onclick="autoEnhancePhoto()">
+                        <i class="ph-bold ph-sparkle"></i> Auto Improve
+                    </button>
+                    <button class="btn btn-glass" onclick="aiUpscalePhoto()">
+                        <i class="ph-bold ph-arrows-out"></i> Upscale
+                    </button>
+                </div>
 
                 <div class="input-group">
                     <div class="flex-between mb-2">
@@ -2070,7 +2087,19 @@
         document.getElementById('adj-c').value = 115;
         document.getElementById('adj-s').value = 110;
         applyFilters();
-        showToast('Auto-Enhance Applied!');
+        showToast('Auto-Improve Applied!');
+    }
+
+    function aiUpscalePhoto() {
+        if(!state.cropper) { showToast("Upload an image first.", "error"); return; }
+        showLoader('AI Upscaling...', -1, 'Enhancing image resolution...');
+        setTimeout(() => {
+            hideLoader();
+            // Simulate upscaling UX by slightly boosting clarity/contrast
+            document.getElementById('adj-c').value = parseInt(document.getElementById('adj-c').value) + 10;
+            applyFilters();
+            showToast('Resolution enhanced! (Simulated)', 'success');
+        }, 1500);
     }
 
     function applyFilters(skipSave = false) {
@@ -2269,6 +2298,29 @@
         } catch (e) {
             console.error(e);
             showToast("AI generation failed or blocked.", "error");
+        } finally { hideLoader(); }
+    }
+
+    async function aiImprovePrompt() {
+        const input = document.getElementById('inp-outfit');
+        let currentPrompt = input.value.trim();
+        if(!currentPrompt) currentPrompt = "Professional formal business attire";
+        
+        showLoader('Improving prompt...', -1, 'Gemini is adding details...');
+        try {
+            const apiKey = ""; 
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${TEXT_MODEL}:generateContent?key=${apiKey}`;
+            const promptText = `Enhance this clothing description to make it highly detailed, photorealistic, and perfect for an AI image generator (keep it focused on clothing for a portrait). Do not include introductory text, just return the exact prompt: "${currentPrompt}"`;
+            
+            const payload = { contents: [{ parts: [{ text: promptText }] }] };
+            const response = await fetchWithRetry(url, payload);
+            const enhanced = response.candidates[0].content.parts[0].text.trim();
+            
+            input.value = enhanced.replace(/^["']|["']$/g, '');
+            showToast('Prompt improved by Gemini!');
+        } catch (e) {
+            console.error(e);
+            showToast("Failed to improve prompt.", "error");
         } finally { hideLoader(); }
     }
 
@@ -2623,6 +2675,46 @@
         if (window.innerWidth <= 768 && typeof setDrawerLevel === 'function') setDrawerLevel(1);
     }
 
+    // --- Drag and Drop for Home Dropzone ---
+    const dropzone = document.getElementById('home-dropzone');
+    if (dropzone) {
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropzone.addEventListener(eventName, () => {
+                dropzone.style.borderColor = 'var(--primary)';
+                dropzone.style.background = 'var(--glass-bg-hover)';
+            }, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, () => {
+                dropzone.style.borderColor = '';
+                dropzone.style.background = '';
+            }, false);
+        });
+
+        dropzone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if(files && files.length > 0) {
+                if(files[0].type.startsWith('image/')) {
+                    document.getElementById('upInput').files = files;
+                    handleUpload({target: {files: files}});
+                } else {
+                    showToast("Please drop a valid image file.", "error");
+                }
+            }
+        }, false);
+    }
+
     // --- Mobile Drawer Logic (3-Level Snap) ---
     const rp = document.getElementById('right-panel');
     const ph = document.getElementById('panel-header');
@@ -2725,46 +2817,6 @@
             setDrawerLevel(nextLevel);
             currentY = 0; startY = 0;
         });
-    }
-
-    // --- Drag and Drop for Home Dropzone ---
-    const dropzone = document.getElementById('home-dropzone');
-    if (dropzone) {
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropzone.addEventListener(eventName, preventDefaults, false);
-        });
-
-        function preventDefaults (e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropzone.addEventListener(eventName, () => {
-                dropzone.style.borderColor = 'var(--primary)';
-                dropzone.style.background = 'var(--glass-bg-hover)';
-            }, false);
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropzone.addEventListener(eventName, () => {
-                dropzone.style.borderColor = '';
-                dropzone.style.background = '';
-            }, false);
-        });
-
-        dropzone.addEventListener('drop', (e) => {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            if(files && files.length > 0) {
-                if(files[0].type.startsWith('image/')) {
-                    document.getElementById('upInput').files = files;
-                    handleUpload({target: {files: files}});
-                } else {
-                    showToast("Please drop a valid image file.", "error");
-                }
-            }
-        }, false);
     }
 </script>
 </body>
