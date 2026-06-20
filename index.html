@@ -3,8 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Gov Photo Pro: Cloud Edition</title>
-    <meta name="description" content="Premium photo editing tool for Cybercafes and Photocopy stores.">
+    <title>Instant Foto | Free Cloud Photo Editor & BG Remover</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Instant Foto is a premium photo editing tool, free background remover, and layout generator for cybercafes and studios. Resize, edit, and compress images instantly.">
+    <meta name="keywords" content="joy kumbhakar, photo editor, instant photo, canva, photo shop, joykumbhakar.netlify.app, Govid, image compressor, bg remover, free, free background remover, passport photo maker, online photo editor">
+    <meta name="author" content="Joy Kumbhakar">
+    <link rel="canonical" href="https://instantfoto.vercel.app/">
+
+    <!-- Open Graph / Social Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://instantfoto.vercel.app/">
+    <meta property="og:title" content="Instant Foto | Premium Cloud Photo Editor">
+    <meta property="og:description" content="Free background remover, passport layout maker, AI outfit swap, and image compressor. Built for cybercafes.">
+    <meta property="og:image" content="https://instantfoto.vercel.app/og-image.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Instant Foto | Free Photo Editor & BG Remover">
+    <meta name="twitter:description" content="Edit, format, and generate passport print layouts instantly in the cloud.">
     
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -123,7 +139,6 @@
         .flex-row { display: flex; align-items: center; }
         .flex-between { display: flex; align-items: center; justify-content: space-between; }
         .gap-2 { gap: 8px; } .gap-3 { gap: 12px; } .gap-4 { gap: 16px; }
-        .w-100 { width: 100%; }
 
         /* --- Glass Utilities --- */
         .glass-panel {
@@ -157,6 +172,7 @@
         
         .header-actions { display: flex; align-items: center; gap: 16px; }
 
+        /* Header Dropdown Specifics */
         .actions-dropdown-container { display: flex; position: relative; align-items: center; }
         .icon-actions-container { display: flex; flex-direction: row; gap: 8px; }
         .action-label { display: none; }
@@ -195,18 +211,20 @@
         .hero-content h2 { font-size: 3.5rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.04em; line-height: 1.1; }
         .hero-content h2 span { background: linear-gradient(135deg, var(--primary), #8B5CF6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero-content p { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 0;}
+        .hero-image { width: 100%; max-width: 400px; object-fit: contain; pointer-events: none; user-select: none; }
 
         .home-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
         .purple-card {
             background: linear-gradient(135deg, #7C3AED, #4F46E5); border-radius: var(--radius-lg); padding: 32px;
-            display: flex; align-items: center; gap: 24px; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease; border: 1px solid transparent;
+            display: flex; align-items: center; gap: 24px; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease; text-decoration: none; border: 1px solid transparent;
         }
         .purple-card:hover { background: linear-gradient(135deg, #6D28D9, #4338CA); transform: translateY(-2px); }
+        .purple-card img { width: 120px; height: 120px; object-fit: contain; flex-shrink: 0; }
         .purple-card-info { flex: 1; color: #ffffff; }
         .purple-card-info h3 { font-size: 1.5rem; color: #ffffff; margin-bottom: 8px; }
         .purple-card-info p { color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.4;}
         
-        .btn-white { background: #ffffff; color: var(--primary); font-weight: 700; padding: 10px 20px; border-radius: var(--radius-sm); border: none; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.9rem; }
+        .btn-white { background: #ffffff; color: var(--primary); font-weight: 700; padding: 10px 20px; border-radius: var(--radius-sm); border: none; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease; font-size: 0.9rem; }
         .btn-white:hover { background: #f3f4f6; }
 
         .home-dropzone { border: 2px dashed rgba(139, 92, 246, 0.4); border-radius: var(--radius-lg); padding: 48px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; background: var(--glass-bg); backdrop-filter: var(--glass-blur); transition: background-color 0.3s ease, border-color 0.3s ease; }
@@ -214,7 +232,8 @@
         .home-dropzone:hover { background: var(--glass-bg-hover); border-color: var(--primary); }
         .dropzone-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(139, 92, 246, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 8px; }
         .home-dropzone h3 { font-size: 1.25rem; font-weight: 700; margin: 0; }
-        
+        .home-dropzone p { font-size: 0.9rem; margin: 0; }
+
         .home-bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
         .list-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; gap: 20px; }
         .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;}
@@ -236,6 +255,7 @@
             .hero-content h2 { font-size: 2.5rem; }
             .home-cards, .home-bottom-grid { grid-template-columns: 1fr; }
             .purple-card { padding: 20px; flex-direction: column; text-align: center; gap: 16px; }
+            .purple-card img { width: 80px; height: 80px; }
         }
 
         /* --- Editor View --- */
@@ -428,7 +448,7 @@
 <div class="modal-overlay active" id="auth-overlay">
     <div class="modal-card glass-panel" style="max-width: 400px; text-align: center;">
         <div class="brand" style="justify-content: center; margin-bottom: 24px;">
-            <i class="ph-fill ph-aperture"></i><h1>GovPhoto<span class="pro-badge">Cloud</span></h1>
+            <i class="ph-fill ph-aperture"></i><h1>Instant<span class="pro-badge">Foto</span></h1>
         </div>
         <h2 style="margin-bottom: 16px; font-size: 1.5rem;" id="auth-title">Admin Sign In</h2>
         
@@ -448,7 +468,7 @@
 <header class="app-bar glass-panel">
     <div class="brand">
         <i class="ph-fill ph-aperture"></i>
-        <h1>GovPhoto<span class="pro-badge">Cloud</span></h1>
+        <h1>Instant<span class="pro-badge">Foto</span></h1>
     </div>
     <div class="flex-row gap-4">
         <div class="actions-dropdown-container">
@@ -466,7 +486,7 @@
         <div class="flex-row gap-3 profile-container" style="border-left: 1px solid var(--glass-border); padding-left: 16px; cursor: pointer;" onclick="if(confirm('Log out from Cloud?')) logout()">
             <div class="flex-column" style="text-align: right;">
                 <span id="user-email-display" style="font-weight: 700; font-size: 0.9rem; line-height: 1;">Loading...</span>
-                <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Premium <i class="ph-bold ph-sign-out" style="vertical-align: middle;"></i></span>
+                <span style="font-size: 0.75rem; font-weight: 600;" id="user-credits-display">... <i class="ph-bold ph-sign-out" style="vertical-align: middle;"></i></span>
             </div>
             <img src="https://ui-avatars.com/api/?name=Admin&background=4F46E5&color=fff" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover;">
         </div>
@@ -1208,48 +1228,53 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
     import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
     import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
 
-    // Your specific Firebase configuration
-    const firebaseConfig = {
-        apiKey: "AIzaSyB-sUgyIHCGJ3KmQzSxYnZPFRzn7tg0ctY",
-        authDomain: "sandippal-portfolio.firebaseapp.com",
-        projectId: "sandippal-portfolio",
-        storageBucket: "sandippal-portfolio.firebasestorage.app",
-        messagingSenderId: "1085349609690",
-        appId: "1:1085349609690:web:3d14ea53d49324b9fde5e3",
-        measurementId: "G-QFMH3G7RLS"
-    };
+    let firebaseConfig;
+    let isPreviewEnv = false;
+    try {
+        firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        if (!firebaseConfig.apiKey) throw new Error('Use fallback');
+        isPreviewEnv = true;
+    } catch(e) {
+        firebaseConfig = {
+            apiKey: "AIzaSyB-sUgyIHCGJ3KmQzSxYnZPFRzn7tg0ctY",
+            authDomain: "sandippal-portfolio.firebaseapp.com",
+            projectId: "sandippal-portfolio",
+            storageBucket: "sandippal-portfolio.firebasestorage.app",
+            messagingSenderId: "1085349609690",
+            appId: "1:1085349609690:web:3d14ea53d49324b9fde5e3",
+            measurementId: "G-QFMH3G7RLS"
+        };
+    }
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
     const db = getFirestore(app);
     const storage = getStorage(app);
     
-    // Safely load Analytics ONLY if the environment supports it
     let analytics = null;
-    isSupported().then((supported) => {
-        if (supported) {
-            analytics = getAnalytics(app);
-        }
-    }).catch(console.warn);
+    if (!isPreviewEnv) {
+        isSupported().then((supported) => {
+            if (supported) analytics = getAnalytics(app);
+        }).catch(console.warn);
+    }
     
     const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
     window.currentUser = null;
+    window.userProfile = null;
 
     window.handleAuth = async () => {
         showLoader('Authenticating...');
         try {
-            // Check if running inside Canvas environment (uses token or anon)
             if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
                 await signInWithCustomToken(auth, __initial_auth_token);
             } else if (typeof __firebase_config !== 'undefined') {
                 await signInAnonymously(auth);
             } else {
-                // Standard Google Login if hosted externally
                 const provider = new GoogleAuthProvider();
                 await signInWithPopup(auth, provider);
             }
@@ -1273,12 +1298,66 @@
             window.currentUser = user;
             document.getElementById('user-email-display').innerText = user.email || 'Cloud User';
             overlay.classList.remove('active');
+            
+            await window.fetchUserProfile();
             await window.fetchLogsFromDB();
         } else {
             window.currentUser = null;
+            window.userProfile = null;
             overlay.classList.add('active');
         }
     });
+
+    window.fetchUserProfile = async () => {
+        if(!window.currentUser) return;
+        try {
+            const userRef = doc(db, 'artifacts', appId, 'users', window.currentUser.uid);
+            const userSnap = await getDoc(userRef);
+            
+            if(userSnap.exists()) {
+                window.userProfile = userSnap.data();
+            } else {
+                // Initialize new user with 5 free credits
+                window.userProfile = { credits: 5, isPro: false };
+                await setDoc(userRef, window.userProfile);
+            }
+            updateCreditUI();
+        } catch (e) {
+            console.error("Error fetching user profile:", e);
+        }
+    };
+
+    window.consumeCredit = async (cost = 1) => {
+        if(!window.currentUser || !window.userProfile) return false;
+        if(window.userProfile.isPro) return true; // Unlimited
+        
+        if(window.userProfile.credits >= cost) {
+            try {
+                const userRef = doc(db, 'artifacts', appId, 'users', window.currentUser.uid);
+                window.userProfile.credits -= cost; // Optimistic update
+                updateCreditUI();
+                await updateDoc(userRef, { credits: increment(-cost) });
+                return true;
+            } catch (e) {
+                console.error("Failed to deduct credit", e);
+                return false;
+            }
+        } else {
+            showToast("Not enough credits! Upgrade to PRO in DB.", "error");
+            return false;
+        }
+    };
+
+    function updateCreditUI() {
+        const display = document.getElementById('user-credits-display');
+        if(!window.userProfile) { display.innerHTML = ''; return; }
+        
+        if (window.userProfile.isPro) {
+            display.innerHTML = '<span style="color: var(--pro-gold); font-weight: 800;">👑 PRO</span> <i class="ph-bold ph-sign-out" style="vertical-align: middle; color: var(--text-main);"></i>';
+        } else {
+            display.innerHTML = `<span style="color: var(--primary);">💎 ${window.userProfile.credits} Credits</span> <i class="ph-bold ph-sign-out" style="vertical-align: middle; color: var(--text-main);"></i>`;
+        }
+    }
 
     window.fetchLogsFromDB = async () => {
         if (!window.currentUser) return;
@@ -1890,22 +1969,25 @@
         if(!state.isRestoring) debouncedSaveState();
     }
 
-    function autoEnhancePhoto() {
+    async function autoEnhancePhoto() {
+        if(!await window.consumeCredit(1)) return;
         document.getElementById('adj-b').value = 110;
         document.getElementById('adj-c').value = 115;
         document.getElementById('adj-s').value = 110;
         applyFilters();
-        showToast('Auto-Improve Applied!');
+        showToast('Auto-Improve Applied (-1 Credit)');
     }
 
-    function aiUpscalePhoto() {
+    async function aiUpscalePhoto() {
         if(!state.cropper) { showToast("Upload an image first.", "error"); return; }
+        if(!await window.consumeCredit(1)) return;
+        
         showLoader('AI Upscaling...', -1, 'Enhancing image resolution...');
         setTimeout(() => {
             hideLoader();
             document.getElementById('adj-c').value = parseInt(document.getElementById('adj-c').value) + 10;
             applyFilters();
-            showToast('Resolution enhanced! (Simulated)', 'success');
+            showToast('Resolution enhanced! (-1 Credit)', 'success');
         }, 1500);
     }
 
@@ -1967,6 +2049,7 @@
     async function aiAutoConfigExam() {
         const query = document.getElementById('inp-ai-exam').value.trim();
         if(!query) { showToast("Please enter an exam or document name.", "error"); return; }
+        if(!await window.consumeCredit(1)) return;
         
         showLoader('Asking Gemini AI...', 0, `Finding photo rules for ${query}...`);
         
@@ -2005,7 +2088,7 @@
                 updateDimensions();
                 if(data.bg) updateBgColor(data.bg);
                 
-                showToast(`✨ ${data.message} (${data.w_mm}x${data.h_mm}mm)`);
+                showToast(`✨ ${data.message} (${data.w_mm}x${data.h_mm}mm) (-1 Credit)`);
                 document.getElementById('inp-ai-exam').value = '';
             } else {
                 throw new Error("Invalid format returned");
@@ -2020,6 +2103,7 @@
 
     async function aiCheckCompliance() {
         if(!state.cropper) { showToast("Upload an image first.", "error"); return; }
+        if(!await window.consumeCredit(1)) return;
         
         showLoader('Analyzing compliance...', 0, "Gemini Vision is checking lighting, pose, and background...");
         
@@ -2066,7 +2150,7 @@
                 hdr.innerHTML = `<i class="ph-fill ph-warning-circle" style="color: var(--error); font-size: 24px;"></i> <span style="font-weight: 600; color: var(--error);">Issues Detected</span>`;
                 list.innerHTML = data.issues.map(i => `<li>${i}</li>`).join('');
             }
-            showToast("Analysis complete!");
+            showToast("Analysis complete! (-1 Credit)");
         } catch (e) {
             console.error(e);
             showToast("AI verification failed.", "error");
@@ -2077,6 +2161,7 @@
         if(!state.cropper) return;
         const outfit = document.getElementById('inp-outfit').value.trim();
         if(!outfit) return;
+        if(!await window.consumeCredit(1)) return;
         
         showLoader('AI Tailoring...', -1, "Gemini is designing your outfit...");
         try {
@@ -2096,7 +2181,7 @@
             
             if(generatedB64) {
                 state.cropper.replace(`data:image/png;base64,${generatedB64}`);
-                showToast("Outfit magically updated!");
+                showToast("Outfit magically updated! (-1 Credit)");
             }
         } catch (e) {
             console.error(e);
@@ -2108,6 +2193,7 @@
         const input = document.getElementById('inp-outfit');
         let currentPrompt = input.value.trim();
         if(!currentPrompt) currentPrompt = "Professional formal business attire";
+        if(!await window.consumeCredit(1)) return;
         
         showLoader('Improving prompt...', -1, 'Gemini is adding details...');
         try {
@@ -2119,7 +2205,7 @@
             const enhanced = response.candidates[0].content.parts[0].text.trim();
             
             input.value = enhanced.replace(/^["']|["']$/g, '');
-            showToast('Prompt improved by Gemini!');
+            showToast('Prompt improved! (-1 Credit)');
         } catch (e) {
             console.error(e);
             showToast("Failed to improve prompt.", "error");
@@ -2128,6 +2214,7 @@
 
     async function removeBackgroundAPI() {
         if(!state.cropper) return;
+        if(!await window.consumeCredit(1)) return;
         
         showLoader('Removing Background...');
         try {
@@ -2145,7 +2232,7 @@
             state.cropper.replace(URL.createObjectURL(outBlob));
             state.bgRemoved = true;
             updateBgColor('#ffffff');
-            showToast('Background removed!');
+            showToast('Background removed! (-1 Credit)');
         } catch (err) {
             console.error(err);
             showToast('API failed.', 'error');
