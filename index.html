@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Gov Photo Pro: Glass Edition</title>
-    <meta name="description" content="Premium photo editing tool for Cybercafes and Photocopy stores.">
+    
+    <!-- SEO Tags -->
+    <title>Gov Photo Pro: Glass Edition | Instant Background Remover & Photo Editor</title>
+    <meta name="description" content="Premium photo editing tool for Cybercafes and Photocopy stores. Instant background removal, AI formatting, image compressor, and passport photo layout generator.">
+    <meta name="keywords" content="joy kumbhakar, photo editor, instant photo, canva, photo shop, joykumbhakar.netlify.app, Govid, image compressor, bg remover, free, free background remover, passport photo maker, cybercafe tools, AI photo editor">
+    <meta name="author" content="Joy Kumbhakar">
+    <link rel="canonical" href="https://instantfoto.vercel.app/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://instantfoto.vercel.app/">
+    <meta property="og:title" content="Gov Photo Pro: Glass Edition">
+    <meta property="og:description" content="Premium photo editing tool for Cybercafes and Photocopy stores. Instant background removal, AI formatting, and layout generation.">
+    <meta property="og:image" content="https://instantfoto.vercel.app/hero-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://instantfoto.vercel.app/">
+    <meta property="twitter:title" content="Gov Photo Pro: Glass Edition">
+    <meta property="twitter:description" content="Premium photo editing tool for Cybercafes and Photocopy stores. Instant background removal, AI formatting, and layout generation.">
+    <meta property="twitter:image" content="https://instantfoto.vercel.app/hero-image.png">
     
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -154,6 +173,7 @@
             background: linear-gradient(135deg, #FDE68A, #F59E0B); color: #78350F; 
             font-size: 0.65rem; padding: 2px 6px; border-radius: 6px; 
             font-weight: 800; text-transform: uppercase; box-shadow: 0 2px 4px rgba(245, 158, 11, 0.3);
+            display: none; /* Controlled by auth */
         }
         
         .btn-icon {
@@ -703,7 +723,7 @@
 <header class="app-bar glass-panel">
     <div class="brand">
         <i class="ph-fill ph-aperture"></i>
-        <h1>GovPhoto<span class="pro-badge">Pro</span></h1>
+        <h1>GovPhoto<span class="pro-badge" style="display: none;">Pro</span></h1>
     </div>
     <div class="flex-row gap-4">
         <div class="actions-dropdown-container">
@@ -720,10 +740,13 @@
         </div>
         <div class="flex-row gap-3 profile-container" style="border-left: 1px solid var(--glass-border); padding-left: 16px; cursor: pointer;">
             <div class="flex-column" style="text-align: right;">
-                <span style="font-weight: 700; font-size: 0.9rem; line-height: 1;">John Doe</span>
-                <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Premium <i class="ph-bold ph-caret-down" style="vertical-align: middle;"></i></span>
+                <span style="font-weight: 700; font-size: 0.9rem; line-height: 1;">User</span>
+                <span id="user-status" style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Loading <i class="ph-bold ph-caret-down" style="vertical-align: middle;"></i></span>
             </div>
-            <img src="person.png" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; background: #fff;">
+            <!-- Fallback generic avatar -->
+            <div style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; background: #fff; color: var(--primary);">
+                <i class="ph-fill ph-user" style="font-size: 24px;"></i>
+            </div>
         </div>
     </div>
 </header>
@@ -826,13 +849,8 @@
             <button class="btn-icon" onclick="document.getElementById('settings-modal').classList.remove('active')"><i class="ph-bold ph-x"></i></button>
         </div>
         <div class="modal-body">
-            <div class="input-group">
-                <label class="input-label">Remove.bg API Key</label>
-                <input type="text" id="inp-api-key" class="flat-input" value="UU1TQFfnDHt3d14184YhfH67">
-                <p class="helper-text">Required for instant background removal.</p>
-            </div>
-            
-            <div class="input-group mt-4">
+            <!-- Removed the API Key Input because it is now securely stored in Vercel Environment Variables -->
+            <div class="input-group mt-2">
                 <label class="input-label">Primary Color</label>
                 <div class="flex-row gap-4 mt-2">
                     <input type="color" id="inp-theme" value="#4F46E5" style="width: 48px; height: 48px; border:none; background:transparent; cursor:pointer;" onchange="updateThemeColor(this.value)">
@@ -885,17 +903,15 @@
         <!-- Hero Section -->
         <div class="home-hero">
             <div class="hero-content">
-                <span class="welcome-text">Welcome back, John <img src="hello.png" alt="Wave" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-left: 4px; padding-bottom: 2px;"></span>
+                <span class="welcome-text">Welcome back, User 👋</span>
                 <h2>Perfect Prints. <br><span>Instant Magic.</span></h2>
                 <p>Remove backgrounds, format photos, and create perfect prints in seconds. The ultimate toolkit for Cybercafes.</p>
             </div>
-            <img src="file_00000000e404720b8dbbfbcffb4476cc.png" class="hero-image" alt="Verified Document Illustration">
         </div>
 
         <!-- Primary Action Cards -->
         <div class="home-cards">
             <div class="purple-card" onclick="document.getElementById('upInput').click()">
-                <img src="Import.png" alt="Import Photos">
                 <div class="purple-card-info">
                     <h3>Import Photos</h3>
                     <p>Import photos or files from your device</p>
@@ -903,7 +919,6 @@
                 </div>
             </div>
             <div class="purple-card" onclick="document.getElementById('upCamera').click()">
-                <img src="Create_new.png" alt="Capture New">
                 <div class="purple-card-info">
                     <h3>Capture New</h3>
                     <p>Take a fresh photo directly from camera</p>
@@ -932,7 +947,7 @@
                     <button class="btn-view-all" onclick="showToast('Recent history feature coming soon!')">View All</button>
                 </div>
                 <div class="list-item" onclick="reimportMock()">
-                    <img src="person.png" class="item-icon" alt="Profile Picture" style="background: white;">
+                    <div class="item-icon"><i class="ph-fill ph-user"></i></div>
                     <div class="item-info">
                         <h4>Profile Picture</h4>
                         <p>JPG • 2.4 MB • Just now</p>
@@ -1174,7 +1189,7 @@
                 <button class="btn btn-filled w-100 mb-4" id="btn-rm-bg" onclick="removeBackgroundAPI()">
                     <i class="ph-bold ph-magic-wand"></i> Remove Background (Remove.bg)
                 </button>
-                <div class="helper-text mb-4 text-center">Uses official Remove.bg API key from Settings.</div>
+                <div class="helper-text mb-4 text-center">Powered securely via Vercel Edge functions.</div>
                 
                 <div id="sec-colors">
                     <div class="input-label mt-4">Studio Gradients <span class="pro-badge">PRO</span></div>
@@ -1206,7 +1221,7 @@
                     <button class="btn btn-filled w-100 mt-3" onclick="aiOutfitSwap()">
                         <i class="ph-bold ph-magic-wand"></i> Generate Outfit
                     </button>
-                    <div class="helper-text text-center mt-2">Powered by Gemini 2.5 Flash Image. Modifies clothes, keeps face intact.</div>
+                    <div class="helper-text text-center mt-2">Powered by Gemini AI. Modifies clothes, keeps face intact. Costs 1 Credit.</div>
                 </div>
 
                 <div class="grid-2">
@@ -1308,7 +1323,7 @@
                         <i class="ph-bold ph-shield-check"></i>
                     </div>
                     <h3 style="font-size: 1.25rem;">Passport Compliance Check</h3>
-                    <p class="text-sm mt-2">Use Gemini Vision AI to verify if the photo meets standard government ID requirements (lighting, pose, background).</p>
+                    <p class="text-sm mt-2">Use Gemini Vision AI to verify if the photo meets standard government ID requirements (lighting, pose, background). Costs 1 Credit.</p>
                 </div>
                 
                 <button class="btn btn-filled w-100 mb-4" onclick="aiCheckCompliance()">
@@ -1550,6 +1565,81 @@
     </div>
 </div>
 
+<!-- Firebase Auth and Firestore Script Module -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, getDoc, setDoc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    let app, auth, db, appId;
+
+    try {
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : { };
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+        appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+    } catch(e) {
+        console.warn("Firebase config not found, running without database connection.");
+    }
+
+    // Default fallback credit check
+    window.checkAndUseCredit = async (cost = 1) => true; 
+    window.currentUserData = { credits: 10, isPro: false };
+
+    if (auth) {
+        window.checkAndUseCredit = async (cost = 1) => {
+            if (!auth.currentUser) return false;
+            if (window.currentUserData.isPro) return true;
+            if (window.currentUserData.credits >= cost) {
+                const docRef = doc(db, 'artifacts', appId, 'users', auth.currentUser.uid, 'account', 'info');
+                await updateDoc(docRef, { credits: window.currentUserData.credits - cost });
+                return true;
+            }
+            if(window.showToast) window.showToast("Not enough credits! Upgrade to Pro.", "error");
+            return false;
+        };
+
+        const initAuth = async () => {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                await signInWithCustomToken(auth, __initial_auth_token);
+            } else {
+                await signInAnonymously(auth);
+            }
+        };
+
+        initAuth().then(() => {
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const docRef = doc(db, 'artifacts', appId, 'users', user.uid, 'account', 'info');
+                    const docSnap = await getDoc(docRef);
+                    if (!docSnap.exists()) {
+                        await setDoc(docRef, { credits: 10, isPro: false, createdAt: Date.now() });
+                    }
+                    
+                    onSnapshot(docRef, (snap) => {
+                        if (snap.exists()) {
+                            window.currentUserData = snap.data();
+                            const statusEl = document.getElementById('user-status');
+                            if (statusEl) {
+                                statusEl.innerHTML = window.currentUserData.isPro 
+                                    ? 'PRO Member <i class="ph-bold ph-caret-down" style="vertical-align: middle;"></i>' 
+                                    : `${window.currentUserData.credits} Credits <i class="ph-bold ph-caret-down" style="vertical-align: middle;"></i>`;
+                            }
+                            const proBadge = document.querySelector('.pro-badge');
+                            if (proBadge) {
+                                proBadge.style.display = window.currentUserData.isPro ? 'inline-block' : 'none';
+                            }
+                        }
+                    }, (error) => {
+                        console.error("Firestore Error:", error);
+                    });
+                }
+            });
+        }).catch(err => console.error("Auth error:", err));
+    }
+</script>
+
 <script>
     // --- Application State ---
     const state = {
@@ -1657,7 +1747,7 @@
         });
     }
 
-    function showToast(msg, type = 'success') {
+    window.showToast = function(msg, type = 'success') {
         const container = document.getElementById('toast-container');
         const toast = document.createElement('div');
         toast.className = `toast glass-panel toast-${type}`;
@@ -2090,8 +2180,10 @@
         showToast('Auto-Improve Applied!');
     }
 
-    function aiUpscalePhoto() {
+    async function aiUpscalePhoto() {
         if(!state.cropper) { showToast("Upload an image first.", "error"); return; }
+        if (!(await window.checkAndUseCredit(1))) return;
+
         showLoader('AI Upscaling...', -1, 'Enhancing image resolution...');
         setTimeout(() => {
             hideLoader();
@@ -2160,12 +2252,13 @@
     async function aiAutoConfigExam() {
         const query = document.getElementById('inp-ai-exam').value.trim();
         if(!query) { showToast("Please enter an exam or document name.", "error"); return; }
+        if (!(await window.checkAndUseCredit(1))) return;
         
         showLoader('Asking Gemini AI...', 0, `Finding photo rules for ${query}...`);
         
         try {
-            const apiKey = "";
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${TEXT_MODEL}:generateContent?key=${apiKey}`;
+            // Target local Vercel endpoint instead of direct Google API
+            const url = `/api/gemini?model=${TEXT_MODEL}`;
             
             const prompt = `You are an expert assistant for a photocopy and cybercafe store. A customer needs a passport-style photo for: "${query}". 
             Determine the official required width and height in millimeters, and the required background color.
@@ -2215,6 +2308,7 @@
 
     async function aiCheckCompliance() {
         if(!state.cropper) { showToast("Upload an image first.", "error"); return; }
+        if (!(await window.checkAndUseCredit(1))) return;
         
         showLoader('Analyzing compliance...', 0, "Gemini Vision is checking lighting, pose, and background...");
         
@@ -2222,8 +2316,8 @@
             const base64Image = state.cropper.getCroppedCanvas({ width: 512, height: 512 }).toDataURL('image/jpeg', 0.8);
             const b64Data = base64Image.split(',')[1];
             
-            const apiKey = ""; 
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${TEXT_MODEL}:generateContent?key=${apiKey}`;
+            // Target local Vercel endpoint instead of direct Google API
+            const url = `/api/gemini?model=${TEXT_MODEL}`;
             
             const prompt = `Act as an expert passport photo verification system. Analyze this cropped photo. 
             Check for 3 things: 
@@ -2273,14 +2367,15 @@
         if(!state.cropper) return;
         const outfit = document.getElementById('inp-outfit').value.trim();
         if(!outfit) return;
+        if (!(await window.checkAndUseCredit(1))) return;
         
         showLoader('AI Tailoring...', -1, "Gemini is designing your outfit...");
         try {
             const base64Image = state.cropper.getCroppedCanvas({ width: 768, height: 768 }).toDataURL('image/png');
             const b64Data = base64Image.split(',')[1];
             
-            const apiKey = ""; 
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${IMAGE_MODEL}:generateContent?key=${apiKey}`;
+            // Target local Vercel endpoint instead of direct Google API
+            const url = `/api/gemini?model=${IMAGE_MODEL}`;
             const prompt = `Change clothing to: ${outfit}. Keep face and background exactly identical. High quality portrait.`;
             
             const payload = {
@@ -2308,8 +2403,8 @@
         
         showLoader('Improving prompt...', -1, 'Gemini is adding details...');
         try {
-            const apiKey = ""; 
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${TEXT_MODEL}:generateContent?key=${apiKey}`;
+            // Target local Vercel endpoint instead of direct Google API
+            const url = `/api/gemini?model=${TEXT_MODEL}`;
             const promptText = `Enhance this clothing description to make it highly detailed, photorealistic, and perfect for an AI image generator (keep it focused on clothing for a portrait). Do not include introductory text, just return the exact prompt: "${currentPrompt}"`;
             
             const payload = { contents: [{ parts: [{ text: promptText }] }] };
@@ -2326,15 +2421,29 @@
 
     async function removeBackgroundAPI() {
         if(!state.cropper) return;
-        const apiKey = document.getElementById('inp-api-key').value.trim();
-        if (!apiKey) { showToast("API Key required. See Settings.", "error"); return; }
+        if (!(await window.checkAndUseCredit(1))) return;
 
         showLoader('Removing Background...');
         try {
             const inputBlob = await new Promise(r => state.cropper.getCroppedCanvas().toBlob(r, 'image/png'));
-            const formData = new FormData(); formData.append('size', 'auto'); formData.append('image_file', inputBlob);
-            const response = await fetch('https://api.remove.bg/v1.0/removebg', { method: 'POST', headers: { 'X-Api-Key': apiKey }, body: formData });
-            if (!response.ok) throw new Error("Remove.bg Error");
+            
+            // Convert Blob to Base64 to match the Node.js backend expectation (JSON body)
+            const base64Data = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                reader.readAsDataURL(inputBlob);
+            });
+            
+            const payload = { image_file_b64: base64Data, size: 'auto' };
+            
+            // Send JSON request to your Vercel Node API endpoint
+            const response = await fetch('/api/removebg', { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/json' }, 
+                body: JSON.stringify(payload) 
+            });
+            
+            if (!response.ok) throw new Error("Remove.bg Proxy Error");
             
             const outBlob = await response.blob();
             state.cropper.replace(URL.createObjectURL(outBlob));
@@ -2579,6 +2688,8 @@
 
     async function processAndExport() {
         if((!state.cropper && state.stagedPhotos.length === 0) || state.isProcessing) return;
+        if (!(await window.checkAndUseCredit(1))) return;
+        
         state.isProcessing = true;
         
         const isPrint = state.currentTool === 'print';
