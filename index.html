@@ -3,24 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Instant Foto | Free Cloud Photo Editor & BG Remover</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Instant Foto is a premium photo editing tool, free background remover, and layout generator for cybercafes and studios. Resize, edit, and compress images instantly.">
-    <meta name="keywords" content="joy kumbhakar, photo editor, instant photo, canva, photo shop, joykumbhakar.netlify.app, Govid, image compressor, bg remover, free, free background remover, passport photo maker, online photo editor">
-    <meta name="author" content="Joy Kumbhakar">
-    <link rel="canonical" href="https://instantfoto.vercel.app/">
-
-    <!-- Open Graph / Social Tags -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://instantfoto.vercel.app/">
-    <meta property="og:title" content="Instant Foto | Premium Cloud Photo Editor">
-    <meta property="og:description" content="Free background remover, passport layout maker, AI outfit swap, and image compressor. Built for cybercafes.">
-    <meta property="og:image" content="https://instantfoto.vercel.app/og-image.jpg">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Instant Foto | Free Photo Editor & BG Remover">
-    <meta name="twitter:description" content="Edit, format, and generate passport print layouts instantly in the cloud.">
+    <title>Gov Photo Pro: Glass Edition</title>
+    <meta name="description" content="Premium photo editing tool for Cybercafes and Photocopy stores.">
     
     <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,25 +71,27 @@
 
         /* --- Background Grid Pattern --- */
         .grid-background {
-            position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: -1;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: -1;
             background-image: linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
                               linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
             background-size: 20px 30px;
-            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%);
-            mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%);
+            -webkit-mask-image: radial-gradient(
+                ellipse 70% 60% at 50% 0%,
+                #000 60%,
+                transparent 100%
+            );
+            mask-image: radial-gradient(
+                ellipse 70% 60% at 50% 0%,
+                #000 60%,
+                transparent 100%
+            );
             pointer-events: none;
         }
-
-        /* --- Global Drag & Drop Overlay --- */
-        #global-dropzone {
-            position: fixed; inset: 0; background: rgba(79, 70, 229, 0.15); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-            z-index: 100000; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px;
-            opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease; border: 4px dashed var(--primary);
-        }
-        #global-dropzone.active { opacity: 1; visibility: visible; }
-        #global-dropzone i { font-size: 64px; color: var(--primary); background: white; border-radius: 50%; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        #global-dropzone h2 { color: var(--primary); font-size: 2rem; font-weight: 800; text-shadow: 0 2px 10px rgba(255,255,255,0.5); }
-        body.dark #global-dropzone h2 { text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
 
         /* --- Scrollbar Styling --- */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -119,10 +105,14 @@
         html, body { height: 100%; height: 100dvh; overflow: hidden; }
 
         body {
-            font-family: 'Inter', system-ui, sans-serif; color: var(--text-main);
-            background-color: var(--bg-color); transition: background-color 0.4s ease;
-            line-height: 1.5; -webkit-font-smoothing: antialiased;
-            display: flex; flex-direction: column; position: relative;
+            font-family: 'Inter', system-ui, sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            transition: background-color 0.4s ease;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            display: flex; flex-direction: column;
+            position: relative;
         }
 
         *:focus { outline: none; }
@@ -142,13 +132,17 @@
 
         /* --- Glass Utilities --- */
         .glass-panel {
-            background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
         }
 
         /* --- App Bar --- */
         .app-bar {
-            height: 64px; display: flex; align-items: center; justify-content: space-between;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
             padding: 0 24px; flex-shrink: 0; z-index: 20;
             border-bottom-left-radius: var(--radius-md); border-bottom-right-radius: var(--radius-md);
         }
@@ -163,8 +157,10 @@
         }
         
         .btn-icon {
-            width: 40px; height: 40px; border-radius: 50%; border: 1px solid transparent; background: transparent;
-            color: var(--text-main); font-size: 22px; display: flex; align-items: center; justify-content: center;
+            width: 40px; height: 40px; border-radius: 50%;
+            border: 1px solid transparent; background: transparent;
+            color: var(--text-main); font-size: 22px;
+            display: flex; align-items: center; justify-content: center;
             cursor: pointer; transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .btn-icon:hover:not(:disabled) { background: var(--glass-bg-hover); border-color: var(--glass-border); }
@@ -189,11 +185,16 @@
             .profile-container img { width: 32px; height: 32px; }
             .app-bar .flex-column { display: none !important; }
 
+            /* Responsive Header Menu - SOLID BACKGROUND */
             .mobile-menu-toggle { display: flex; }
             .icon-actions-container {
-                position: absolute; top: calc(100% + 15px); right: 0; flex-direction: column; gap: 4px; padding: 12px;
-                background: #ffffff; border: 1px solid var(--glass-border); border-radius: var(--radius-md); box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-                opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s ease, visibility 0.2s ease; min-width: 200px; z-index: 1000;
+                position: absolute; top: calc(100% + 15px); right: 0;
+                flex-direction: column; gap: 4px; padding: 12px;
+                background: #ffffff; /* SOLID WHITE */
+                border: 1px solid var(--glass-border); border-radius: var(--radius-md); box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+                opacity: 0; visibility: hidden; pointer-events: none;
+                transition: opacity 0.2s ease, visibility 0.2s ease;
+                min-width: 200px; z-index: 1000;
             }
             body.dark .icon-actions-container { background: #161b22; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
             .icon-actions-container.show { opacity: 1; visibility: visible; pointer-events: auto; }
@@ -202,50 +203,118 @@
         }
 
         /* --- Upload View (Home Screen) --- */
-        .view-upload { flex: 1; overflow-y: auto; z-index: 10; padding: 0 24px; }
-        .home-container { width: 100%; max-width: 1080px; margin: 0 auto; padding: 32px 0 64px 0; display: flex; flex-direction: column; gap: 48px; }
-
-        .home-hero { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
-        .hero-content { flex: 1; max-width: 500px; }
-        .welcome-text { display: inline-block; font-size: 1rem; font-weight: 500; color: var(--text-muted); margin-bottom: 12px; }
-        .hero-content h2 { font-size: 3.5rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.04em; line-height: 1.1; }
-        .hero-content h2 span { background: linear-gradient(135deg, var(--primary), #8B5CF6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-content p { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 0;}
-        .hero-image { width: 100%; max-width: 400px; object-fit: contain; pointer-events: none; user-select: none; }
-
-        .home-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-        .purple-card {
-            background: linear-gradient(135deg, #7C3AED, #4F46E5); border-radius: var(--radius-lg); padding: 32px;
-            display: flex; align-items: center; gap: 24px; cursor: pointer; transition: background 0.3s ease, transform 0.2s ease; text-decoration: none; border: 1px solid transparent;
+        .view-upload {
+            flex: 1; overflow-y: auto; z-index: 10; padding: 0 24px;
         }
-        .purple-card:hover { background: linear-gradient(135deg, #6D28D9, #4338CA); transform: translateY(-2px); }
-        .purple-card img { width: 120px; height: 120px; object-fit: contain; flex-shrink: 0; }
+
+        .home-container {
+            width: 100%; max-width: 1080px; margin: 0 auto; padding: 32px 0 64px 0;
+            display: flex; flex-direction: column; gap: 48px;
+        }
+
+        /* Hero Section */
+        .home-hero {
+            display: flex; align-items: center; justify-content: space-between; gap: 40px;
+        }
+        .hero-content {
+            flex: 1; max-width: 500px;
+        }
+        .welcome-text {
+            display: inline-block; font-size: 1rem; font-weight: 500; color: var(--text-muted); margin-bottom: 12px;
+        }
+        .hero-content h2 {
+            font-size: 3.5rem; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.04em; line-height: 1.1;
+        }
+        .hero-content h2 span {
+            background: linear-gradient(135deg, var(--primary), #8B5CF6);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero-content p { font-size: 1.1rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 0;}
+        .hero-image {
+            width: 100%; max-width: 400px; object-fit: contain; pointer-events: none; user-select: none;
+        }
+
+        /* Primary Purple Cards */
+        .home-cards {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+        }
+        .purple-card {
+            background: linear-gradient(135deg, #7C3AED, #4F46E5);
+            border-radius: var(--radius-lg); padding: 32px;
+            display: flex; align-items: center; gap: 24px;
+            cursor: pointer; transition: background 0.3s ease;
+            text-decoration: none; border: 1px solid transparent;
+        }
+        .purple-card:hover {
+            background: linear-gradient(135deg, #6D28D9, #4338CA);
+        }
+        .purple-card img {
+            width: 120px; height: 120px; object-fit: contain; flex-shrink: 0;
+        }
         .purple-card-info { flex: 1; color: #ffffff; }
         .purple-card-info h3 { font-size: 1.5rem; color: #ffffff; margin-bottom: 8px; }
         .purple-card-info p { color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-bottom: 20px; line-height: 1.4;}
         
-        .btn-white { background: #ffffff; color: var(--primary); font-weight: 700; padding: 10px 20px; border-radius: var(--radius-sm); border: none; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease; font-size: 0.9rem; }
-        .btn-white:hover { background: #f3f4f6; }
+        .btn-white {
+            background: #ffffff; color: var(--primary); font-weight: 700;
+            padding: 10px 20px; border-radius: var(--radius-sm); border: none;
+            display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease; font-size: 0.9rem;
+        }
+        .btn-white:hover {
+            background: #f3f4f6;
+        }
 
-        .home-dropzone { border: 2px dashed rgba(139, 92, 246, 0.4); border-radius: var(--radius-lg); padding: 48px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; background: var(--glass-bg); backdrop-filter: var(--glass-blur); transition: background-color 0.3s ease, border-color 0.3s ease; }
+        /* Dropzone */
+        .home-dropzone {
+            border: 2px dashed rgba(139, 92, 246, 0.4); border-radius: var(--radius-lg);
+            padding: 48px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px;
+            background: var(--glass-bg); backdrop-filter: var(--glass-blur); transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
         body.dark .home-dropzone { border-color: rgba(255,255,255,0.15); }
-        .home-dropzone:hover { background: var(--glass-bg-hover); border-color: var(--primary); }
-        .dropzone-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(139, 92, 246, 0.1); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 8px; }
+        .home-dropzone:hover {
+            background: var(--glass-bg-hover); border-color: var(--primary);
+        }
+        .dropzone-icon {
+            width: 64px; height: 64px; border-radius: 50%; background: rgba(139, 92, 246, 0.1);
+            color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 8px;
+        }
         .home-dropzone h3 { font-size: 1.25rem; font-weight: 700; margin: 0; }
         .home-dropzone p { font-size: 0.9rem; margin: 0; }
 
-        .home-bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-        .list-card { background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-lg); padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+        /* Bottom Grid */
+        .home-bottom-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+        }
+        .list-card {
+            background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
+            padding: 24px; display: flex; flex-direction: column; gap: 20px;
+        }
         .list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;}
         .list-header h3 { font-size: 1.1rem; display: flex; align-items: center; gap: 8px; margin: 0;}
         .list-header i { color: var(--primary); font-size: 1.2rem; }
+        .btn-view-all {
+            background: transparent; border: 1px solid var(--glass-border); border-radius: var(--radius-sm);
+            padding: 4px 12px; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-view-all:hover { background: var(--glass-bg-hover); color: var(--text-main); }
 
-        .list-item { display: flex; align-items: center; gap: 16px; padding: 12px; border-radius: var(--radius-sm); border: 1px solid transparent; transition: background-color 0.3s ease, border-color 0.3s ease; cursor: pointer; }
-        .list-item:hover { background: var(--glass-bg-hover); border-color: var(--glass-border); }
-        .item-icon { width: 48px; height: 48px; border-radius: 8px; object-fit: cover; background: rgba(139, 92, 246, 0.05); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--primary); }
+        .list-item {
+            display: flex; align-items: center; gap: 16px; padding: 12px; border-radius: var(--radius-sm); border: 1px solid transparent;
+            transition: background-color 0.3s ease, border-color 0.3s ease; cursor: pointer;
+        }
+        .list-item:hover {
+            background: var(--glass-bg-hover); border-color: var(--glass-border);
+        }
+        .item-icon {
+            width: 48px; height: 48px; border-radius: 8px; object-fit: cover;
+            background: rgba(139, 92, 246, 0.05); border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; font-size: 20px; color: var(--primary);
+        }
         .item-info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
         .item-info h4 { font-size: 0.95rem; margin: 0; font-weight: 600; }
         .item-info p { font-size: 0.8rem; margin: 0; }
+        .item-status { font-size: 0.75rem; font-weight: 600; color: var(--success); padding: 4px 10px; background: rgba(16,185,129,0.1); border-radius: var(--radius-full); }
+
         .action-arrow { color: var(--text-muted); transition: color 0.3s ease; }
         .list-item:hover .action-arrow { color: var(--text-main); }
 
@@ -262,25 +331,59 @@
         .view-editor { flex: 1; min-height: 0; display: none; flex-direction: column; z-index: 10; }
         .workspace-area { display: flex; flex-direction: column; flex: 1; min-height: 0; gap: 16px; padding: 16px; }
 
-        .left-toolbar { display: flex; flex-direction: row; gap: 12px; padding: 12px; border-radius: var(--radius-md); overflow-x: auto; overflow-y: hidden; scrollbar-width: none; flex-shrink: 0; }
-        .tool-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 12px 16px; min-width: 84px; background: transparent; border: 1px solid transparent; border-radius: var(--radius-sm); color: var(--text-muted); cursor: pointer; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; }
+        /* 1. Left Toolbar */
+        .left-toolbar {
+            display: flex; flex-direction: row; gap: 12px; padding: 12px;
+            border-radius: var(--radius-md); overflow-x: auto; overflow-y: hidden; scrollbar-width: none; flex-shrink: 0;
+        }
+
+        .tool-btn {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 6px; padding: 12px 16px; min-width: 84px;
+            background: transparent; border: 1px solid transparent; border-radius: var(--radius-sm);
+            color: var(--text-muted); cursor: pointer; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
         .tool-btn i { font-size: 24px; }
         .tool-btn span { font-size: 0.75rem; font-weight: 600; }
         .tool-btn:hover { background: var(--glass-bg-hover); color: var(--text-main); border-color: var(--glass-border); }
-        .tool-btn.active { background: var(--primary); color: var(--on-primary); box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); border-color: var(--primary); }
+        .tool-btn.active { 
+            background: var(--primary); color: var(--on-primary); 
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); border-color: var(--primary);
+        }
         .tool-btn.pro { color: var(--pro-gold); }
         .tool-btn.active.pro { background: var(--pro-gold); color: #000; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3); border-color: var(--pro-gold);}
 
-        .canvas-container { flex: 1; min-height: 0; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 16px; background: rgba(0,0,0,0.03); background-image: radial-gradient(rgba(0,0,0,0.1) 1px, transparent 1px); background-size: 20px 20px; }
+        /* 2. Center Canvas Area */
+        .canvas-container {
+            flex: 1; min-height: 0; border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden; padding: 16px;
+            background: rgba(0,0,0,0.03);
+            background-image: radial-gradient(rgba(0,0,0,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
         body.dark .canvas-container { background-color: rgba(0,0,0,0.4); background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px); }
 
-        .cropper-controls { position: absolute; bottom: 16px; right: 16px; z-index: 10; display: flex; gap: 8px; padding: 8px; border-radius: var(--radius-md); }
-        
-        .right-panel { display: flex; flex-direction: column; flex-shrink: 0; height: auto; max-height: 45vh; border-radius: var(--radius-md); overflow-y: auto; overflow-x: hidden; }
-        .panel-header { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 64px; padding: 0; border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 10; background: var(--glass-bg); backdrop-filter: var(--glass-blur); border-top-left-radius: var(--radius-md); border-top-right-radius: var(--radius-md); cursor: grab; touch-action: none; }
+        /* 3. Right Properties Panel */
+        .right-panel {
+            display: flex; flex-direction: column; flex-shrink: 0;
+            height: auto; max-height: 45vh; border-radius: var(--radius-md);
+            overflow-y: auto; overflow-x: hidden;
+        }
+
+        .panel-header {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 64px; padding: 0; border-bottom: 1px solid var(--glass-border);
+            position: sticky; top: 0; z-index: 10;
+            background: var(--glass-bg); backdrop-filter: var(--glass-blur);
+            border-top-left-radius: var(--radius-md); border-top-right-radius: var(--radius-md);
+            cursor: grab;
+            touch-action: none; /* Prevents background scrolling when dragging */
+        }
         .panel-header:active { cursor: grabbing; }
         .drag-handle { display: block; width: 48px; height: 6px; border-radius: 3px; background: rgba(0, 0, 0, 0.2); margin-bottom: 8px; box-shadow: inset 0 1px 1px rgba(0,0,0,0.1); }
         body.dark .drag-handle { background: rgba(255, 255, 255, 0.3); box-shadow: inset 0 1px 1px rgba(255,255,255,0.1); }
+        
         .tool-panel { padding: 24px; display: none; animation: slideUp 0.3s ease-out; }
         .tool-panel.active { display: block; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -296,16 +399,30 @@
             .drag-handle { display: none !important; }
         }
 
+        /* Editor Overrides for Mobile Layout */
         @media(max-width: 768px) {
             .workspace-area { padding: 0; gap: 0; position: relative; overflow: hidden; }
             .left-toolbar { border-radius: 0; margin-bottom: 0; padding: 8px; z-index: 10; background: var(--glass-bg); backdrop-filter: var(--glass-blur); }
             .canvas-container { border-radius: 0; margin-bottom: 64px; }
-            .right-panel { position: absolute; bottom: 0; left: 0; right: 0; width: 100%; height: calc(100% - 16px); max-height: 100%; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: var(--radius-lg); border-top-right-radius: var(--radius-lg); z-index: 100; transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 -10px 40px rgba(0,0,0,0.1); transform: translateY(calc(100% - 64px)); }
+            
+            .right-panel {
+                position: absolute; bottom: 0; left: 0; right: 0; width: 100%;
+                height: calc(100% - 16px); max-height: 100%; /* Constrains the max size leaving space for the header */
+                border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+                border-top-left-radius: var(--radius-lg); border-top-right-radius: var(--radius-lg);
+                z-index: 100;
+                transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+                /* Default to collapsed */
+                transform: translateY(calc(100% - 64px)); 
+            }
             body.dark .right-panel { box-shadow: 0 -10px 40px rgba(0,0,0,0.4); }
             
+            /* 3-Level Drawer States using Relative Transforms */
             .right-panel.drawer-collapsed { transform: translateY(calc(100% - 64px)); }
             .right-panel.drawer-mid { transform: translateY(50%); }
             .right-panel.drawer-full { transform: translateY(0); }
+            
             .right-panel.dragging { transition: none; }
 
             .export-bar { flex-direction: column; align-items: stretch; padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); gap: 16px; z-index: 20; position: relative; border-radius: 0;}
@@ -313,162 +430,280 @@
             #panel-title { font-size: 1rem; margin: 0; }
         }
 
-        /* --- Forms & Inputs --- */
+        /* --- Forms & Inputs (Glassy) --- */
         .input-group { margin-bottom: 20px; }
         .input-label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text-main); margin-bottom: 8px; }
-        .flat-input, .flat-select, textarea.flat-input { width: 100%; padding: 14px 16px; background: var(--glass-bg); color: var(--text-main); font-family: inherit; font-size: 0.95rem; font-weight: 500; border: 1px solid var(--glass-border); border-radius: var(--radius-sm); transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
-        .flat-input:focus, .flat-select:focus, textarea.flat-input:focus { border-color: var(--primary); background: var(--glass-bg-hover); box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2); }
-        .flat-input::placeholder { color: var(--text-muted); opacity: 0.7; }
-        .flat-select { appearance: none; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236B7280' viewBox='0 0 256 256'%3E%3Cpath d='M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z'%3E%3C/path%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
-        body.dark .flat-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%239CA3AF' viewBox='0 0 256 256'%3E%3Cpath d='M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z'%3E%3C/path%3E%3C/svg%3E"); }
-        .form-helper-box { background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 16px; border-radius: var(--radius-sm); margin-bottom: 20px; }
 
-        /* Buttons */
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 20px; font-size: 0.95rem; font-weight: 600; font-family: inherit; border-radius: var(--radius-sm); cursor: pointer; border: 1px solid transparent; transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.1s ease, color 0.3s ease; user-select: none; }
-        .btn:active:not(:disabled) { transform: scale(0.98); }
+        .flat-input, .flat-select, textarea.flat-input {
+            width: 100%; padding: 14px 16px;
+            background: var(--glass-bg); color: var(--text-main);
+            font-family: inherit; font-size: 0.95rem; font-weight: 500;
+            border: 1px solid var(--glass-border); border-radius: var(--radius-sm);
+            transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .flat-input:focus, .flat-select:focus, textarea.flat-input:focus { 
+             border-color: var(--primary); background: var(--glass-bg-hover);
+             box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+        .flat-input::placeholder { color: var(--text-muted); opacity: 0.7; }
+        
+        .flat-select {
+            appearance: none; cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%236B7280' viewBox='0 0 256 256'%3E%3Cpath d='M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 16px center;
+        }
+        body.dark .flat-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%239CA3AF' viewBox='0 0 256 256'%3E%3Cpath d='M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z'%3E%3C/path%3E%3C/svg%3E"); }
+
+        .form-helper-box {
+            background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 16px; border-radius: var(--radius-sm); margin-bottom: 20px;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 12px 20px; font-size: 0.95rem; font-weight: 600; font-family: inherit;
+            border-radius: var(--radius-sm); cursor: pointer; border: 1px solid transparent;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; user-select: none;
+        }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
         .btn-filled { background-color: var(--primary); color: var(--on-primary); box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2); }
         .btn-filled:hover:not(:disabled) { background-color: var(--primary-hover); }
+        
         .btn-glass { background-color: var(--glass-bg); color: var(--text-main); border-color: var(--glass-border); backdrop-filter: var(--glass-blur);}
         .btn-glass:hover:not(:disabled) { background-color: var(--glass-bg-hover); }
+
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-        .btn-view-all { background: transparent; border: 1px solid var(--glass-border); border-radius: var(--radius-sm); padding: 4px 12px; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease; }
-        .btn-view-all:hover { background: var(--glass-bg-hover); color: var(--text-main); }
 
-        /* Sliders */
+        /* --- Modern Sliders --- */
         input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; height: 32px; margin: 0; cursor: pointer;}
-        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; background: rgba(0, 0, 0, 0.15); border-radius: var(--radius-full); }
-        body.dark input[type=range]::-webkit-slider-runnable-track { background: rgba(255, 255, 255, 0.2); }
-        input[type=range]::-webkit-slider-thumb { height: 20px; width: 20px; border-radius: 50%; background: var(--primary); -webkit-appearance: none; margin-top: -7px; transition: background-color 0.1s; box-shadow: 0 2px 6px rgba(0,0,0,0.2); border: 2px solid #fff; }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 6px; background: rgba(0, 0, 0, 0.15); border-radius: var(--radius-full);
+        }
+        body.dark input[type=range]::-webkit-slider-runnable-track {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        input[type=range]::-webkit-slider-thumb {
+            height: 20px; width: 20px; border-radius: 50%; background: var(--primary);
+            -webkit-appearance: none; margin-top: -7px; transition: background-color 0.1s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2); border: 2px solid #fff;
+        }
 
-        /* Switch */
+        /* --- iOS Switch (From Uiverse.io by sayborduu) --- */
         .switch-container { display: flex; align-items: center; justify-content: space-between; padding: 12px 0;}
-        .switch-parent { width: 51px; height: 31px; position: relative; }
-        .checkbox { opacity: 0; width: 0; height: 0; position: absolute; }
-        .switch { width: 100%; height: 100%; display: block; background-color: rgba(0, 0, 0, 0.15); border: 1px solid var(--glass-border); border-radius: 16px; cursor: pointer; transition: background-color 0.2s ease-out, border-color 0.2s ease-out; }
-        body.dark .switch { background-color: rgba(255, 255, 255, 0.2); }
-        .slider { width: 27px; height: 27px; position: absolute; left: calc(50% - 27px / 2 - 10px); top: calc(50% - 27px / 2); border-radius: 20px; background: #ffffff; box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15), 0px 3px 1px rgba(0, 0, 0, 0.06); transition: left 0.2s ease-out; cursor: pointer; }
-        .checkbox:checked + .switch { background-color: var(--primary); border-color: var(--primary); }
-        .checkbox:checked + .switch .slider { left: calc(50% - 27px / 2 + 10px); }
+        .switch-parent {
+            width: 51px;
+            height: 31px;
+            position: relative;
+        }
+        .checkbox {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+        .switch {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background-color: rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
+        }
+        body.dark .switch {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        .slider {
+            width: 27px;
+            height: 27px;
+            position: absolute;
+            left: calc(50% - 27px / 2 - 10px);
+            top: calc(50% - 27px / 2);
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15), 0px 3px 1px rgba(0, 0, 0, 0.06);
+            transition: left 0.2s ease-out;
+            cursor: pointer;
+        }
+        .checkbox:checked + .switch {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+        .checkbox:checked + .switch .slider {
+            left: calc(50% - 27px / 2 + 10px);
+        }
 
-        /* Colors Swatches */
+        /* --- Colors Swatches --- */
         .swatch-grid { display: flex; flex-wrap: wrap; gap: 12px; }
-        .swatch { width: 44px; height: 44px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: border-color 0.3s ease; box-sizing: border-box; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .swatch {
+            width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+            border: 2px solid transparent; transition: border-color 0.3s ease;
+            box-sizing: border-box; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
         .swatch.active { border-color: var(--primary); padding: 3px; background-clip: content-box;}
         .bg-checker { background: repeating-conic-gradient(#E5E7EB 0% 25%, #FFFFFF 0% 50%) 0 0 / 16px 16px; }
         body.dark .bg-checker { background: repeating-conic-gradient(#374151 0% 25%, #1F2937 0% 50%) 0 0 / 16px 16px; }
 
-        /* Export Bar */
-        .export-bar { padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-shrink: 0; border-top-left-radius: var(--radius-md); border-top-right-radius: var(--radius-md); z-index: 20; }
+        /* --- Export Bar --- */
+        .export-bar {
+            padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+            flex-shrink: 0; border-top-left-radius: var(--radius-md); border-top-right-radius: var(--radius-md);
+            z-index: 20;
+        }
         .export-settings { flex-grow: 1; display: flex; flex-direction: column; gap: 6px; }
-
-        /* Modals */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 9000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        
+        /* --- Modals --- */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            z-index: 9000; display: flex; align-items: center; justify-content: center; 
+            opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-card { padding: 24px; border-radius: var(--radius-lg); width: 90%; max-width: 480px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; }
+        .modal-card {
+            padding: 24px; border-radius: var(--radius-lg); width: 90%; max-width: 480px; 
+            max-height: 90vh; display: flex; flex-direction: column; overflow: hidden;
+        }
         .modal-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--glass-border); flex-shrink: 0;}
         .modal-body { overflow-y: auto; flex-grow: 1; padding-top: 16px; padding-right: 4px; }
         
-        #auth-overlay { z-index: 10001; background: rgba(0,0,0,0.6); backdrop-filter: blur(12px); }
-
+        /* Stats & Logs */
         .stat-box { padding: 20px; border-radius: var(--radius-md); text-align: center; margin-bottom: 12px; }
         .stat-box .val { font-size: 2.2rem; font-weight: 700; color: var(--primary); }
         .stat-box .lbl { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;}
         .logs-container { display: flex; flex-direction: column; gap: 8px;}
         .log-item { padding: 16px; border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--glass-border);}
 
-        /* Toasts */
+        /* --- Toasts --- */
         #toast-container { position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 10000; display: flex; flex-direction: column; gap: 8px; pointer-events: none; width: 90%; max-width: 400px; }
-        .toast { padding: 16px 20px; border-radius: var(--radius-md); font-size: 0.95rem; font-weight: 500; display: flex; align-items: center; gap: 12px; transform: translateY(-20px); opacity: 0; transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: auto; background: var(--glass-bg); backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); }
-        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast {
+            padding: 16px 20px; border-radius: var(--radius-md); font-size: 0.95rem; font-weight: 500;
+            display: flex; align-items: center; gap: 12px; transform: translateY(-20px); opacity: 0;
+            transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: auto;
+        }
+        .toast.show { opacity: 1; }
         .toast-success i { color: var(--success); font-size: 24px;}
         .toast-error i { color: var(--error); font-size: 24px;}
 
-        /* Cropper */
+        /* --- Cropper Overrides & Canvas --- */
         .cropper-view-box { outline: 2px solid var(--primary); border-radius: 4px; }
         .cropper-line, .cropper-point { background-color: var(--primary); }
         .cropper-point { width: 14px; height: 14px; border-radius: 50%; } 
         .cropper-modal { background-color: var(--bg-color); opacity: 0.7; }
-        .face-guide-overlay { position: absolute; inset: 0; pointer-events: none; z-index: 1; display: none; justify-content: center; align-items: center; }
+        
+        .face-guide-overlay {
+            position: absolute; inset: 0; pointer-events: none; z-index: 1;
+            display: none; justify-content: center; align-items: center;
+        }
         .face-guide-overlay.active { display: flex; }
         .face-guide-svg { width: 100%; height: 100%; color: rgba(255,255,255,0.8); filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
 
         .helper-text { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; line-height: 1.4; }
         .spec-badge { display: inline-block; padding: 4px 10px; border-radius: var(--radius-full); font-size: 0.75rem; font-weight: 600; color: var(--text-muted); margin-left: auto; border: 1px solid var(--glass-border); }
 
-        #undo-redo-bar { position: absolute; top: 16px; left: 50%; transform: translateX(-50%); padding: 6px 12px; border-radius: var(--radius-full); display: flex; gap: 8px; z-index: 10; }
-        .zoom-bar { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); padding: 12px 24px; border-radius: var(--radius-full); display: flex; align-items: center; gap: 16px; z-index: 10; }
+        /* --- UI Overlay Controls --- */
+        #undo-redo-bar {
+            position: absolute; top: 16px; left: 50%; transform: translateX(-50%);
+            padding: 6px 12px; border-radius: var(--radius-full); display: flex; gap: 8px; z-index: 10;
+        }
+
+        .zoom-bar {
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+            padding: 12px 24px; border-radius: var(--radius-full); display: flex; align-items: center; gap: 16px; z-index: 10;
+        }
 
         #print-preview-box { display: none; position: absolute; inset: 0; overflow: hidden; border-radius: var(--radius-md);}
         #print-scroll-area { width: 100%; height: 100%; overflow: auto; padding: 40px; display: flex; justify-content: center; align-items: flex-start; }
         #live-print-canvas { transform-origin: top center; transition: transform 0.1s; box-shadow: 0 10px 30px rgba(0,0,0,0.2); background: white;}
         
-        .queue-item { position: relative; flex-shrink: 0; margin-top: 8px; transition: transform 0.2s;}
-        .queue-item:hover { transform: translateY(-2px); }
+        .queue-item { position: relative; flex-shrink: 0; margin-top: 8px;}
         .queue-item img { width: 48px; height: 60px; object-fit: contain; border: 1px solid var(--glass-border); border-radius: var(--radius-sm); background: white;}
         .queue-item .badge { position: absolute; top: -8px; right: -8px; background: var(--primary); color: white; border-radius: 50%; width: 22px; height: 22px; font-size: 11px; display: flex; align-items: center; justify-content: center; font-weight: 700; border: 2px solid var(--bg-color); box-shadow: 0 2px 4px rgba(0,0,0,0.2);}
 
-        .dress-item { border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 16px; text-align: center; cursor: pointer; transition: border-color 0.3s ease, background-color 0.3s ease; }
-        .dress-item:hover { border-color: var(--primary); background-color: var(--glass-bg-hover); }
+        .dress-item { border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 16px; text-align: center; cursor: pointer; transition: border-color 0.3s ease; }
+        .dress-item:hover { border-color: var(--primary); }
+        
         .reset-icon { color: var(--text-muted); cursor: pointer; font-size: 18px; transition: color 0.3s ease;}
         .reset-icon:hover { color: var(--primary); }
 
-        .loader-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        /* --- Pegtop Loader (From Uiverse.io) --- */
+        .loader-overlay {
+            position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
         .loader-overlay.active { opacity: 1; visibility: visible; }
         .loader-card { padding: 40px; border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; width: 90%; max-width: 320px; }
+        
+        .loader {
+          --fill-color: var(--primary);
+          --shine-color: rgba(0,0,0,0.1);
+          transform: scale(0.7); 
+          width: 100px;
+          height: auto;
+          position: relative;
+          filter: drop-shadow(0 0 10px var(--shine-color));
+          margin: -10px 0;
+        }
+        body.dark .loader { --shine-color: rgba(255,255,255,0.1); }
+        .loader #pegtopone { position: absolute; animation: flowe-one 1s linear infinite; }
+        .loader #pegtoptwo { position: absolute; opacity: 0; transform: scale(0) translateY(-200px) translateX(-100px); animation: flowe-two 1s linear infinite; animation-delay: 0.3s; }
+        .loader #pegtopthree { position: absolute; opacity: 0; transform: scale(0) translateY(-200px) translateX(100px); animation: flowe-three 1s linear infinite; animation-delay: 0.6s; }
+        .loader svg g path:first-child { fill: var(--fill-color); }
+        
+        @keyframes flowe-one {
+          0% { transform: scale(0.5) translateY(-200px); opacity: 0; }
+          25% { transform: scale(0.75) translateY(-100px); opacity: 1; }
+          50% { transform: scale(1) translateY(0px); opacity: 1; }
+          75% { transform: scale(0.5) translateY(50px); opacity: 1; }
+          100% { transform: scale(0) translateY(100px); opacity: 0; }
+        }
+        @keyframes flowe-two {
+          0% { transform: scale(0.5) rotateZ(-10deg) translateY(-200px) translateX(-100px); opacity: 0; }
+          25% { transform: scale(1) rotateZ(-5deg) translateY(-100px) translateX(-50px); opacity: 1; }
+          50% { transform: scale(1) rotateZ(0deg) translateY(0px) translateX(-25px); opacity: 1; }
+          75% { transform: scale(0.5) rotateZ(5deg) translateY(50px) translateX(0px); opacity: 1; }
+          100% { transform: scale(0) rotateZ(10deg) translateY(100px) translateX(25px); opacity: 0; }
+        }
+        @keyframes flowe-three {
+          0% { transform: scale(0.5) rotateZ(10deg) translateY(-200px) translateX(100px); opacity: 0; }
+          25% { transform: scale(1) rotateZ(5deg) translateY(-100px) translateX(50px); opacity: 1; }
+          50% { transform: scale(1) rotateZ(0deg) translateY(0px) translateX(25px); opacity: 1; }
+          75% { transform: scale(0.5) rotateZ(-5deg) translateY(50px) translateX(0px); opacity: 1; }
+          100% { transform: scale(0) rotateZ(-10deg) translateY(100px) translateX(-25px); opacity: 0; }
+        }
         
         /* Command Palette Specific */
         .quick-action-card { width: 100%; height: 100%; display: flex; flex-direction: column; background: transparent;}
         .search-container { display: flex; align-items: center; gap: 12px; padding: 0 8px 16px 8px; border-bottom: 1px solid var(--glass-border); flex-shrink: 0;}
         .search-container input { width: 100%; border: 0; outline: none; font-size: 1.1rem; background: transparent; color: var(--text-main); font-family: inherit;}
         .search-container input::placeholder { color: var(--text-muted); opacity: 0.7; }
+        
         .results { display: flex; flex-direction: column; padding: 16px 0; overflow-y: auto; flex: 1;}
         .results p.label { padding: 0 16px; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.05em;}
         .results .entry { display: grid; grid-template-columns: 44px 1fr auto; gap: 16px; padding: 12px 16px; cursor: pointer; align-items: center; transition: background-color 0.3s ease; border-radius: var(--radius-sm);}
+        
         .results .entry:hover { background: var(--glass-bg-hover); }
         .results .entry .icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); border: 1px solid var(--glass-border); font-size: 20px; transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;}
         .results .entry:hover .icon { background: var(--primary); color: white; border-color: var(--primary);}
         .results .entry .desc { display: flex; flex-direction: column; gap: 2px; }
         .results .entry .desc label { font-weight: 600; font-size: 0.95rem; color: var(--text-main); cursor: pointer;}
         .results .entry .desc span { font-weight: 500; font-size: 0.8rem; color: var(--text-muted); }
+        
+        .results .entry .icon svg { width: 20px; height: 20px; }
+        .results .entry .icon svg path, .results .entry .icon svg circle { stroke: var(--text-main); transition: stroke 0.3s ease; }
+        .results .entry:hover .icon svg path, .results .entry:hover .icon svg circle { stroke: white; }
+        
         .results .entry .badge { padding: 4px 8px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: var(--radius-sm); font-weight: 700; font-size: 0.7rem; color: var(--success); text-transform: uppercase;}
     </style>
 </head>
 <body>
 <div class="grid-background"></div>
-
-<!-- GLOBAL DRAG & DROP OVERLAY -->
-<div id="global-dropzone">
-    <i class="ph-bold ph-download-simple"></i>
-    <h2>Drop photo to import</h2>
-</div>
-
-<!-- FIREBASE AUTH GATEWAY -->
-<div class="modal-overlay active" id="auth-overlay">
-    <div class="modal-card glass-panel" style="max-width: 400px; text-align: center;">
-        <div class="brand" style="justify-content: center; margin-bottom: 24px;">
-            <i class="ph-fill ph-aperture"></i><h1>Instant<span class="pro-badge">Foto</span></h1>
-        </div>
-        <h2 style="margin-bottom: 16px; font-size: 1.5rem;" id="auth-title">Admin Sign In</h2>
-        
-        <button class="btn btn-filled w-100" style="background-color: #ffffff; color: #111827; border: 1px solid var(--glass-border); gap: 12px; font-weight: 600; padding: 14px;" id="btn-auth-action" onclick="handleAuth()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.16v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.16C1.43 8.55 1 10.22 1 12s.43 3.45 1.16 4.93l3.68-2.84z" fill="#FBBC05"/>
-                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.16 7.07l3.68 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-            </svg>
-            Sign in with Google
-        </button>
-        <p class="helper-text mt-4">Authorized Personnel Only.</p>
-    </div>
-</div>
-
 <header class="app-bar glass-panel">
     <div class="brand">
         <i class="ph-fill ph-aperture"></i>
-        <h1>Instant<span class="pro-badge">Foto</span></h1>
+        <h1>GovPhoto<span class="pro-badge">Pro</span></h1>
     </div>
     <div class="flex-row gap-4">
         <div class="actions-dropdown-container">
@@ -478,17 +713,17 @@
             <div class="icon-actions-container" id="icon-actions">
                 <button class="btn-icon" onclick="openQuickActions()" title="Quick Actions"><i class="ph-bold ph-magnifying-glass"></i><span class="action-label">Quick Actions</span></button>
                 <button class="btn-icon" onclick="openDashboard()" title="Dashboard"><i class="ph-bold ph-chart-line-up"></i><span class="action-label">Dashboard</span></button>
-                <button class="btn-icon" onclick="document.getElementById('settings-modal').classList.add('active')" title="Settings"><i class="ph-bold ph-gear"></i><span class="action-label">Settings</span></button>
+                <button class="btn-icon" onclick="openSettings()" title="Settings"><i class="ph-bold ph-gear"></i><span class="action-label">Settings</span></button>
                 <button class="btn-icon" onclick="resetApp()" title="Reset"><i class="ph-bold ph-arrow-counter-clockwise"></i><span class="action-label">Reset Editor</span></button>
                 <button class="btn-icon" onclick="toggleTheme()" id="themeBtn" title="Theme"><i class="ph-bold ph-moon"></i><span class="action-label">Toggle Theme</span></button>
             </div>
         </div>
-        <div class="flex-row gap-3 profile-container" style="border-left: 1px solid var(--glass-border); padding-left: 16px; cursor: pointer;" onclick="if(confirm('Log out from Cloud?')) logout()">
+        <div class="flex-row gap-3 profile-container" style="border-left: 1px solid var(--glass-border); padding-left: 16px; cursor: pointer;">
             <div class="flex-column" style="text-align: right;">
-                <span id="user-email-display" style="font-weight: 700; font-size: 0.9rem; line-height: 1;">Loading...</span>
-                <span style="font-size: 0.75rem; font-weight: 600;" id="user-credits-display">... <i class="ph-bold ph-sign-out" style="vertical-align: middle;"></i></span>
+                <span style="font-weight: 700; font-size: 0.9rem; line-height: 1;">John Doe</span>
+                <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Premium <i class="ph-bold ph-caret-down" style="vertical-align: middle;"></i></span>
             </div>
-            <img src="https://ui-avatars.com/api/?name=Admin&background=4F46E5&color=fff" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover;">
+            <img src="person.png" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; background: #fff;">
         </div>
     </div>
 </header>
@@ -591,7 +826,13 @@
             <button class="btn-icon" onclick="document.getElementById('settings-modal').classList.remove('active')"><i class="ph-bold ph-x"></i></button>
         </div>
         <div class="modal-body">
-            <div class="input-group mt-2">
+            <div class="input-group">
+                <label class="input-label">Remove.bg API Key</label>
+                <input type="text" id="inp-api-key" class="flat-input" value="UU1TQFfnDHt3d14184YhfH67">
+                <p class="helper-text">Required for instant background removal.</p>
+            </div>
+            
+            <div class="input-group mt-4">
                 <label class="input-label">Primary Color</label>
                 <div class="flex-row gap-4 mt-2">
                     <input type="color" id="inp-theme" value="#4F46E5" style="width: 48px; height: 48px; border:none; background:transparent; cursor:pointer;" onchange="updateThemeColor(this.value)">
@@ -625,7 +866,7 @@
                 <input type="number" id="inp-price" class="flat-input" value="499" onchange="updateDashboardStats()">
             </div>
             
-            <h4 class="mt-2" style="padding-bottom: 8px; border-bottom: 1px solid var(--glass-border);">Cloud Print History</h4>
+            <h4 class="mt-2" style="padding-bottom: 8px; border-bottom: 1px solid var(--glass-border);">Print History</h4>
             <div class="logs-container" id="logs-list">
                 <!-- Dynamic logs will appear here -->
             </div>
@@ -644,15 +885,17 @@
         <!-- Hero Section -->
         <div class="home-hero">
             <div class="hero-content">
-                <span class="welcome-text">Connected to Firebase Cloud</span>
+                <span class="welcome-text">Welcome back, John <img src="hello.png" alt="Wave" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-left: 4px; padding-bottom: 2px;"></span>
                 <h2>Perfect Prints. <br><span>Instant Magic.</span></h2>
-                <p>Format photos, verify compliance, and instantly backup all generated prints to cloud storage.</p>
+                <p>Remove backgrounds, format photos, and create perfect prints in seconds. The ultimate toolkit for Cybercafes.</p>
             </div>
+            <img src="file_00000000e404720b8dbbfbcffb4476cc.png" class="hero-image" alt="Verified Document Illustration">
         </div>
 
         <!-- Primary Action Cards -->
         <div class="home-cards">
             <div class="purple-card" onclick="document.getElementById('upInput').click()">
+                <img src="Import.png" alt="Import Photos">
                 <div class="purple-card-info">
                     <h3>Import Photos</h3>
                     <p>Import photos or files from your device</p>
@@ -660,6 +903,7 @@
                 </div>
             </div>
             <div class="purple-card" onclick="document.getElementById('upCamera').click()">
+                <img src="Create_new.png" alt="Capture New">
                 <div class="purple-card-info">
                     <h3>Capture New</h3>
                     <p>Take a fresh photo directly from camera</p>
@@ -681,9 +925,42 @@
 
         <!-- Bottom Grid Lists -->
         <div class="home-bottom-grid">
+            <!-- Recent Imports Mock List -->
             <div class="list-card">
                 <div class="list-header">
-                    <h3><i class="ph-bold ph-clock-counter-clockwise"></i> Cloud Actions</h3>
+                    <h3><i class="ph-bold ph-clock-counter-clockwise"></i> Recent Imports</h3>
+                    <button class="btn-view-all" onclick="showToast('Recent history feature coming soon!')">View All</button>
+                </div>
+                <div class="list-item" onclick="reimportMock()">
+                    <img src="person.png" class="item-icon" alt="Profile Picture" style="background: white;">
+                    <div class="item-info">
+                        <h4>Profile Picture</h4>
+                        <p>JPG • 2.4 MB • Just now</p>
+                    </div>
+                    <span class="item-status">Completed</span>
+                </div>
+                <div class="list-item" onclick="reimportMock()">
+                    <div class="item-icon"><i class="ph-fill ph-file-pdf"></i></div>
+                    <div class="item-info">
+                        <h4>ID Document</h4>
+                        <p>JPG • 1.1 MB • 5 min ago</p>
+                    </div>
+                    <span class="item-status">Completed</span>
+                </div>
+                <div class="list-item" onclick="reimportMock()">
+                    <div class="item-icon"><i class="ph-fill ph-image"></i></div>
+                    <div class="item-info">
+                        <h4>Passport Scan</h4>
+                        <p>PNG • 1.8 MB • 15 min ago</p>
+                    </div>
+                    <span class="item-status">Completed</span>
+                </div>
+            </div>
+
+            <!-- Quick Actions Mock List -->
+            <div class="list-card">
+                <div class="list-header">
+                    <h3><i class="ph-bold ph-lightning"></i> Quick Actions</h3>
                 </div>
                 <div class="list-item" onclick="triggerHomeAction('dress', 'AI Outfit Swap')">
                     <div class="item-icon" style="background: rgba(139, 92, 246, 0.1);"><i class="ph-bold ph-t-shirt"></i></div>
@@ -719,6 +996,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <input id="upInput" type="file" accept="image/jpeg, image/png, image/webp" style="display: none;" onchange="handleUpload(event)">
@@ -761,13 +1039,6 @@
             <div id="undo-redo-bar" class="glass-panel">
                 <button class="btn-icon" style="width: 32px; height: 32px;" id="btn-undo" onclick="undo()" title="Undo (Ctrl+Z)" disabled><i class="ph-bold ph-arrow-u-up-left"></i></button>
                 <button class="btn-icon" style="width: 32px; height: 32px;" id="btn-redo" onclick="redo()" title="Redo (Ctrl+Y)" disabled><i class="ph-bold ph-arrow-u-up-right"></i></button>
-            </div>
-
-            <!-- Canvas Zoom Controls -->
-            <div class="cropper-controls glass-panel">
-                <button class="btn-icon" style="width: 32px; height: 32px;" onclick="state.cropper?.zoom(0.1)" title="Zoom In"><i class="ph-bold ph-magnifying-glass-plus"></i></button>
-                <button class="btn-icon" style="width: 32px; height: 32px;" onclick="state.cropper?.zoom(-0.1)" title="Zoom Out"><i class="ph-bold ph-magnifying-glass-minus"></i></button>
-                <button class="btn-icon" style="width: 32px; height: 32px;" onclick="state.cropper?.reset()" title="Reset Fit"><i class="ph-bold ph-corners-out"></i></button>
             </div>
 
             <img id="work-img" src="" style="display: none; max-width: 100%;">
@@ -901,9 +1172,9 @@
             <!-- BACKGROUND PANEL -->
             <div class="tool-panel" id="panel-bg">
                 <button class="btn btn-filled w-100 mb-4" id="btn-rm-bg" onclick="removeBackgroundAPI()">
-                    <i class="ph-bold ph-magic-wand"></i> Remove Background (AI)
+                    <i class="ph-bold ph-magic-wand"></i> Remove Background (Remove.bg)
                 </button>
-                <div class="helper-text mb-4 text-center">Powered by secure Vercel API.</div>
+                <div class="helper-text mb-4 text-center">Uses official Remove.bg API key from Settings.</div>
                 
                 <div id="sec-colors">
                     <div class="input-label mt-4">Studio Gradients <span class="pro-badge">PRO</span></div>
@@ -935,7 +1206,7 @@
                     <button class="btn btn-filled w-100 mt-3" onclick="aiOutfitSwap()">
                         <i class="ph-bold ph-magic-wand"></i> Generate Outfit
                     </button>
-                    <div class="helper-text text-center mt-2">Powered by secure Gemini API. Modifies clothes, keeps face intact.</div>
+                    <div class="helper-text text-center mt-2">Powered by Gemini 2.5 Flash Image. Modifies clothes, keeps face intact.</div>
                 </div>
 
                 <div class="grid-2">
@@ -1135,10 +1406,7 @@
                             <label class="input-label" style="margin-bottom: 0;">Copies of current photo</label>
                             <span id="max-copies-hint" class="text-xs font-semibold" style="color: var(--pro-gold);">Max: --</span>
                         </div>
-                        <div class="flex-row gap-2">
-                            <input type="number" id="print-copies" class="flat-input" value="10" min="1" oninput="triggerPrintUpdate()">
-                            <button class="btn btn-glass" onclick="document.getElementById('print-copies').value = document.getElementById('max-copies-hint').dataset.max; triggerPrintUpdate();" title="Fill Page"><i class="ph-bold ph-arrows-out-line-horizontal"></i></button>
-                        </div>
+                        <input type="number" id="print-copies" class="flat-input" value="10" min="1" oninput="triggerPrintUpdate()">
                     </div>
 
                     <div class="flex-row gap-2 mb-3">
@@ -1197,16 +1465,14 @@
             </div>
             <div class="flex-row gap-3 mt-1">
                 <input type="range" id="exp-size" min="20" max="1024" value="200" step="10" oninput="updateSizeLabel()" style="flex-grow: 1;">
-                <select id="exp-fmt" class="flat-select" style="width: 100px; padding: 8px;">
+                <select id="exp-fmt" class="flat-select" style="width: 90px; padding: 8px;">
                     <option value="jpeg">JPG</option>
                     <option value="png">PNG</option>
-                    <option value="webp">WEBP</option>
-                    <option value="pdf" style="display:none;">PDF</option>
                 </select>
             </div>
         </div>
         <button class="btn btn-filled" style="padding: 14px 28px; border-radius: var(--radius-full);" id="btn-main-export" onclick="processAndExport()">
-            <i class="ph-bold ph-download-simple"></i> EXPORT TO CLOUD
+            <i class="ph-bold ph-download-simple"></i> DOWNLOAD
         </button>
     </div>
 </div>
@@ -1214,6 +1480,68 @@
 <!-- Global Loader -->
 <div class="loader-overlay" id="global-loader">
     <div class="loader-card glass-panel">
+        <div class="loader">
+          <svg id="pegtopone" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+            <defs>
+              <filter id="shine"><feGaussianBlur stdDeviation="3"></feGaussianBlur></filter>
+              <mask id="mask"><path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="white"></path></mask>
+              <radialGradient id="gradient-1" cx="50" cy="66" fx="50" fy="66" r="30" gradientTransform="translate(0 35) scale(1 0.5)" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="black" stop-opacity="0.3"></stop><stop offset="50%" stop-color="black" stop-opacity="0.1"></stop><stop offset="100%" stop-color="black" stop-opacity="0"></stop></radialGradient>
+              <radialGradient id="gradient-2" cx="55" cy="20" fx="55" fy="20" r="30" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="white" stop-opacity="0.3"></stop><stop offset="50%" stop-color="white" stop-opacity="0.1"></stop><stop offset="100%" stop-color="white" stop-opacity="0"></stop></radialGradient>
+              <radialGradient id="gradient-3" cx="85" cy="50" fx="85" fy="50" xlink:href="#gradient-2"></radialGradient>
+              <radialGradient id="gradient-4" cx="50" cy="58" fx="50" fy="58" r="60" gradientTransform="translate(0 47) scale(1 0.2)" xlink:href="#gradient-3"></radialGradient>
+              <linearGradient id="gradient-5" x1="50" y1="90" x2="50" y2="10" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="black" stop-opacity="0.2"></stop><stop offset="40%" stop-color="black" stop-opacity="0"></stop></linearGradient>
+            </defs>
+            <g>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="currentColor"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-1)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="none" stroke="white" opacity="0.3" stroke-width="3" filter="url(#shine)" mask="url(#mask)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-2)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-3)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-4)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-5)"></path>
+            </g>
+          </svg>
+          <svg id="pegtoptwo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+            <defs>
+              <filter id="shine"><feGaussianBlur stdDeviation="3"></feGaussianBlur></filter>
+              <mask id="mask"><path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="white"></path></mask>
+              <radialGradient id="gradient-1" cx="50" cy="66" fx="50" fy="66" r="30" gradientTransform="translate(0 35) scale(1 0.5)" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="black" stop-opacity="0.3"></stop><stop offset="50%" stop-color="black" stop-opacity="0.1"></stop><stop offset="100%" stop-color="black" stop-opacity="0"></stop></radialGradient>
+              <radialGradient id="gradient-2" cx="55" cy="20" fx="55" fy="20" r="30" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="white" stop-opacity="0.3"></stop><stop offset="50%" stop-color="white" stop-opacity="0.1"></stop><stop offset="100%" stop-color="white" stop-opacity="0"></stop></radialGradient>
+              <radialGradient id="gradient-3" cx="85" cy="50" fx="85" fy="50" xlink:href="#gradient-2"></radialGradient>
+              <radialGradient id="gradient-4" cx="50" cy="58" fx="50" fy="58" r="60" gradientTransform="translate(0 47) scale(1 0.2)" xlink:href="#gradient-3"></radialGradient>
+              <linearGradient id="gradient-5" x1="50" y1="90" x2="50" y2="10" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="black" stop-opacity="0.2"></stop><stop offset="40%" stop-color="black" stop-opacity="0"></stop></linearGradient>
+            </defs>
+            <g>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="currentColor"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-1)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="none" stroke="white" opacity="0.3" stroke-width="3" filter="url(#shine)" mask="url(#mask)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-2)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-3)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-4)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-5)"></path>
+            </g>
+          </svg>
+          <svg id="pegtopthree" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+            <defs>
+              <filter id="shine"><feGaussianBlur stdDeviation="3"></feGaussianBlur></filter>
+              <mask id="mask"><path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="white"></path></mask>
+              <radialGradient id="gradient-1" cx="50" cy="66" fx="50" fy="66" r="30" gradientTransform="translate(0 35) scale(1 0.5)" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="black" stop-opacity="0.3"></stop><stop offset="50%" stop-color="black" stop-opacity="0.1"></stop><stop offset="100%" stop-color="black" stop-opacity="0"></stop></radialGradient>
+              <radialGradient id="gradient-2" cx="55" cy="20" fx="55" fy="20" r="30" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="white" stop-opacity="0.3"></stop><stop offset="50%" stop-color="white" stop-opacity="0.1"></stop><stop offset="100%" stop-color="white" stop-opacity="0"></stop></radialGradient>
+              <radialGradient id="gradient-3" cx="85" cy="50" fx="85" fy="50" xlink:href="#gradient-2"></radialGradient>
+              <radialGradient id="gradient-4" cx="50" cy="58" fx="50" fy="58" r="60" gradientTransform="translate(0 47) scale(1 0.2)" xlink:href="#gradient-3"></radialGradient>
+              <linearGradient id="gradient-5" x1="50" y1="90" x2="50" y2="10" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="black" stop-opacity="0.2"></stop><stop offset="40%" stop-color="black" stop-opacity="0"></stop></linearGradient>
+            </defs>
+            <g>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="currentColor"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-1)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="none" stroke="white" opacity="0.3" stroke-width="3" filter="url(#shine)" mask="url(#mask)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-2)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-3)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-4)"></path>
+              <path d="M63,37c-6.7-4-4-27-13-27s-6.3,23-13,27-27,4-27,13,20.3,9,27,13,4,27,13,27,6.3-23,13-27,27-4,27-13-20.3-9-27-13Z" fill="url(#gradient-5)"></path>
+            </g>
+          </svg>
+        </div>
         <div style="font-weight: 600; font-size: 1.1rem; color: var(--text-main);" id="loader-text">Processing...</div>
         <div class="loader-progress-bar" id="loader-bar-cont" style="display: none; width: 100%; height: 4px; background: rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden;">
             <div class="loader-progress-fill" id="loader-bar" style="height: 100%; background: var(--primary); width: 0%; transition: width 0.3s;"></div>
@@ -1222,213 +1550,9 @@
     </div>
 </div>
 
-<!-- ============================================== -->
-<!-- 🚀 FIREBASE + NEXT.JS ARCHITECTURE LOGIC 🚀 -->
-<!-- ============================================== -->
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken, GoogleAuthProvider, signInWithPopup, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, getDoc, setDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-    import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
-    import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
-
-    let firebaseConfig;
-    let isPreviewEnv = false;
-    try {
-        firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        if (!firebaseConfig.apiKey) throw new Error('Use fallback');
-        isPreviewEnv = true;
-    } catch(e) {
-        firebaseConfig = {
-            apiKey: "AIzaSyB-sUgyIHCGJ3KmQzSxYnZPFRzn7tg0ctY",
-            authDomain: "sandippal-portfolio.firebaseapp.com",
-            projectId: "sandippal-portfolio",
-            storageBucket: "sandippal-portfolio.firebasestorage.app",
-            messagingSenderId: "1085349609690",
-            appId: "1:1085349609690:web:3d14ea53d49324b9fde5e3",
-            measurementId: "G-QFMH3G7RLS"
-        };
-    }
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    const storage = getStorage(app);
-    
-    let analytics = null;
-    if (!isPreviewEnv) {
-        isSupported().then((supported) => {
-            if (supported) analytics = getAnalytics(app);
-        }).catch(console.warn);
-    }
-    
-    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-    window.currentUser = null;
-    window.userProfile = null;
-
-    window.handleAuth = async () => {
-        showLoader('Authenticating...');
-        try {
-            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                await signInWithCustomToken(auth, __initial_auth_token);
-            } else if (typeof __firebase_config !== 'undefined') {
-                await signInAnonymously(auth);
-            } else {
-                const provider = new GoogleAuthProvider();
-                await signInWithPopup(auth, provider);
-            }
-        } catch (error) {
-            console.error("Auth error:", error);
-            showToast(error.message, 'error');
-        } finally {
-            hideLoader();
-        }
-    };
-
-    window.logout = async () => {
-        showLoader('Logging out...');
-        await signOut(auth);
-        window.location.reload();
-    };
-
-    onAuthStateChanged(auth, async (user) => {
-        const overlay = document.getElementById('auth-overlay');
-        if (user) {
-            window.currentUser = user;
-            document.getElementById('user-email-display').innerText = user.email || 'Cloud User';
-            overlay.classList.remove('active');
-            
-            await window.fetchUserProfile();
-            await window.fetchLogsFromDB();
-        } else {
-            window.currentUser = null;
-            window.userProfile = null;
-            overlay.classList.add('active');
-        }
-    });
-
-    window.fetchUserProfile = async () => {
-        if(!window.currentUser) return;
-        try {
-            const userRef = doc(db, 'artifacts', appId, 'users', window.currentUser.uid);
-            const userSnap = await getDoc(userRef);
-            
-            if(userSnap.exists()) {
-                window.userProfile = userSnap.data();
-            } else {
-                // Initialize new user with 5 free credits
-                window.userProfile = { credits: 5, isPro: false };
-                await setDoc(userRef, window.userProfile);
-            }
-            updateCreditUI();
-        } catch (e) {
-            console.error("Error fetching user profile:", e);
-        }
-    };
-
-    window.consumeCredit = async (cost = 1) => {
-        if(!window.currentUser || !window.userProfile) return false;
-        if(window.userProfile.isPro) return true; // Unlimited
-        
-        if(window.userProfile.credits >= cost) {
-            try {
-                const userRef = doc(db, 'artifacts', appId, 'users', window.currentUser.uid);
-                window.userProfile.credits -= cost; // Optimistic update
-                updateCreditUI();
-                await updateDoc(userRef, { credits: increment(-cost) });
-                return true;
-            } catch (e) {
-                console.error("Failed to deduct credit", e);
-                return false;
-            }
-        } else {
-            showToast("Not enough credits! Upgrade to PRO in DB.", "error");
-            return false;
-        }
-    };
-
-    function updateCreditUI() {
-        const display = document.getElementById('user-credits-display');
-        if(!window.userProfile) { display.innerHTML = ''; return; }
-        
-        if (window.userProfile.isPro) {
-            display.innerHTML = '<span style="color: var(--pro-gold); font-weight: 800;">👑 PRO</span> <i class="ph-bold ph-sign-out" style="vertical-align: middle; color: var(--text-main);"></i>';
-        } else {
-            display.innerHTML = `<span style="color: var(--primary);">💎 ${window.userProfile.credits} Credits</span> <i class="ph-bold ph-sign-out" style="vertical-align: middle; color: var(--text-main);"></i>`;
-        }
-    }
-
-    window.fetchLogsFromDB = async () => {
-        if (!window.currentUser) return;
-        try {
-            const logsRef = collection(db, 'artifacts', appId, 'users', window.currentUser.uid, 'print_logs');
-            const snapshot = await getDocs(logsRef);
-            
-            const logs = [];
-            snapshot.forEach((doc) => {
-                logs.push({ id: doc.id, ...doc.data() });
-            });
-            
-            logs.sort((a, b) => b.created_at - a.created_at);
-
-            window.state.printLogs = logs.map(log => ({
-                id: log.id,
-                date: new Date(log.created_at).toLocaleString(),
-                revenue: log.revenue
-            }));
-            
-            if (typeof updateDashboardStats === 'function') updateDashboardStats();
-        } catch (e) { 
-            console.error("DB Fetch Error:", e); 
-        }
-    };
-
-    window.uploadToCloudStorage = async (blob, filename) => {
-        if (!window.currentUser) return;
-        try {
-            showLoader('Uploading backup to cloud...');
-            const safeName = filename.replace(/[^a-zA-Z0-9.\-_]/g, '');
-            const filePath = `artifacts/${appId}/users/${window.currentUser.uid}/${Date.now()}_${safeName}`;
-            const storageRef = ref(storage, filePath);
-            
-            await uploadBytes(storageRef, blob, { contentType: blob.type });
-
-            showToast("Downloaded & Backed up to Cloud!", "success");
-        } catch (e) {
-            console.error("Storage upload error:", e);
-            showToast("Downloaded locally, but cloud backup failed.", "warning");
-        } finally {
-            hideLoader();
-        }
-    };
-    
-    // Exposed helper for Dashboard Database operations
-    window.insertLogDB = async (rev) => {
-        if (!window.currentUser) return;
-        try {
-            const logsRef = collection(db, 'artifacts', appId, 'users', window.currentUser.uid, 'print_logs');
-            await addDoc(logsRef, { revenue: rev, created_at: Date.now() });
-        } catch(e) { console.error("DB Insert Error:", e); }
-    };
-    
-    window.clearLogsDB = async () => {
-        if (!window.currentUser) return;
-        try {
-            const logsRef = collection(db, 'artifacts', appId, 'users', window.currentUser.uid, 'print_logs');
-            const snapshot = await getDocs(logsRef);
-            const deletePromises = [];
-            snapshot.forEach((document) => {
-                deletePromises.push(deleteDoc(document.ref));
-            });
-            await Promise.all(deletePromises);
-        } catch(e) { console.error("DB Delete Error:", e); }
-    };
-</script>
-
 <script>
     // --- Application State ---
-    window.state = {
+    const state = {
         cropper: null,
         fileName: 'photo',
         bgColor: 'transparent',
@@ -1439,12 +1563,12 @@
         flipV: false,
         isProcessing: false,
         stagedPhotos: [],
-        printLogs: [], // Managed by Firebase
+        printLogs: JSON.parse(localStorage.getItem('gov_printLogs') || '[]'),
         pricePerSheet: parseInt(localStorage.getItem('gov_pricePerSheet') || '499'),
         history: [],
         historyIndex: -1,
         isRestoring: false,
-        drawerLevel: 1 
+        drawerLevel: 1 // 0: Collapsed, 1: Mid, 2: Full
     };
 
     const DPI = 300;
@@ -1486,11 +1610,8 @@
         }
     });
 
-    // Global Keydowns (Escape to close modals, Undo/Redo)
+    // Global Keydowns
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            document.querySelectorAll('.modal-overlay:not(#auth-overlay)').forEach(m => m.classList.remove('active'));
-        }
         if (e.ctrlKey || e.metaKey) {
             if (e.key === 'z') { e.preventDefault(); undo(); }
             if (e.key === 'y') { e.preventDefault(); redo(); }
@@ -1498,7 +1619,9 @@
     });
 
     window.addEventListener('resize', debounce(() => {
-        // Handled by cropperjs natively
+        if (state.cropper && state.currentTool === 'crop') {
+             // Cropper.js handles its own resize natively based on window updates
+        }
     }, 250));
 
     function toggleTheme() {
@@ -1684,7 +1807,6 @@
         if(type === 'print') triggerPrintUpdate();
     }
 
-    // Dashboard Logic (Firebase Integrations)
     function openDashboard() {
         document.getElementById('inp-price').value = state.pricePerSheet;
         updateDashboardStats();
@@ -1704,25 +1826,30 @@
         renderLogsList();
     }
 
-    async function recordPrintJob() {
+    function recordPrintJob() {
         const rev = state.pricePerSheet;
         const newLog = { id: Date.now(), date: new Date().toLocaleString(), revenue: rev };
         state.printLogs.unshift(newLog);
+        localStorage.setItem('gov_printLogs', JSON.stringify(state.printLogs));
         updateDashboardStats();
+    }
 
-        if (window.currentUser && window.insertLogDB) {
-            await window.insertLogDB(rev);
+    function resetDashboard() {
+        if(confirm("CLEAR all print history? This cannot be undone.")) {
+            state.printLogs = [];
+            localStorage.setItem('gov_printLogs', '[]');
+            updateDashboardStats();
         }
     }
 
-    async function resetDashboard() {
-        if(confirm("CLEAR all print history? This cannot be undone.")) {
-            state.printLogs = [];
-            updateDashboardStats();
-            if (window.currentUser && window.clearLogsDB) {
-                await window.clearLogsDB();
-            }
-        }
+    function triggerHomeAction(toolId, toolTitle) {
+        state.pendingTool = { id: toolId, title: toolTitle };
+        document.getElementById('upInput').click();
+    }
+
+    function reimportMock() {
+        showToast("Select a photo to re-import...");
+        document.getElementById('upInput').click();
     }
 
     function renderLogsList() {
@@ -1742,11 +1869,6 @@
                 </div>
             </div>
         `).join('');
-    }
-
-    function triggerHomeAction(toolId, toolTitle) {
-        state.pendingTool = { id: toolId, title: toolTitle };
-        document.getElementById('upInput').click();
     }
 
     function addToPrintQueue() {
@@ -1797,6 +1919,7 @@
         document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
         document.getElementById(`panel-${toolId}`).classList.add('active');
 
+        // Automatically expand drawer to at least "Mid" level on mobile when clicking a tool
         if (window.innerWidth <= 768) {
             if (state.drawerLevel === 0 && typeof setDrawerLevel === 'function') {
                 setDrawerLevel(1);
@@ -1805,20 +1928,15 @@
 
         const printBox = document.getElementById('print-preview-box');
         const cropperCont = document.querySelector('.cropper-container');
-        const cropperControls = document.querySelector('.cropper-controls');
         const fmtSelect = document.getElementById('exp-fmt');
         const expSize = document.getElementById('exp-size');
         
         if (toolId === 'print') {
             if(cropperCont) cropperCont.style.display = 'none';
-            if(cropperControls) cropperControls.style.display = 'none';
             printBox.style.display = 'block';
-            document.getElementById('btn-main-export').innerHTML = '<i class="ph-bold ph-printer"></i> EXPORT TO CLOUD PDF';
+            document.getElementById('btn-main-export').innerHTML = '<i class="ph-bold ph-printer"></i> GENERATE PDF';
             
-            Array.from(fmtSelect.options).forEach(o => {
-                if(o.value === 'pdf') { o.style.display = 'block'; o.selected = true; }
-                else o.style.display = 'none';
-            });
+            fmtSelect.innerHTML = '<option value="pdf">PDF Document</option><option value="jpeg">JPG Sheet</option>';
             expSize.disabled = true;
             document.getElementById('lbl-size').textContent = 'High Res Print';
             
@@ -1826,13 +1944,9 @@
         } else {
             printBox.style.display = 'none';
             if(cropperCont) cropperCont.style.display = 'block';
-            if(cropperControls) cropperControls.style.display = 'flex';
-            document.getElementById('btn-main-export').innerHTML = '<i class="ph-bold ph-cloud-arrow-up"></i> EXPORT TO CLOUD';
+            document.getElementById('btn-main-export').innerHTML = '<i class="ph-bold ph-download-simple"></i> DOWNLOAD PHOTO';
             
-            Array.from(fmtSelect.options).forEach(o => {
-                if(o.value === 'pdf') { o.style.display = 'none'; }
-                else { o.style.display = 'block'; if(o.value === 'jpeg') o.selected = true; }
-            });
+            fmtSelect.innerHTML = '<option value="jpeg">JPG</option><option value="png">PNG</option>';
             expSize.disabled = false;
             updateSizeLabel();
         }
@@ -1852,7 +1966,6 @@
         
         const reader = new FileReader();
         reader.onload = (ev) => {
-            document.getElementById('global-dropzone').classList.remove('active');
             document.getElementById('view-upload').style.display = 'none';
             document.getElementById('view-editor').style.display = 'flex';
             
@@ -1969,25 +2082,23 @@
         if(!state.isRestoring) debouncedSaveState();
     }
 
-    async function autoEnhancePhoto() {
-        if(!await window.consumeCredit(1)) return;
+    function autoEnhancePhoto() {
         document.getElementById('adj-b').value = 110;
         document.getElementById('adj-c').value = 115;
         document.getElementById('adj-s').value = 110;
         applyFilters();
-        showToast('Auto-Improve Applied (-1 Credit)');
+        showToast('Auto-Improve Applied!');
     }
 
-    async function aiUpscalePhoto() {
+    function aiUpscalePhoto() {
         if(!state.cropper) { showToast("Upload an image first.", "error"); return; }
-        if(!await window.consumeCredit(1)) return;
-        
         showLoader('AI Upscaling...', -1, 'Enhancing image resolution...');
         setTimeout(() => {
             hideLoader();
+            // Simulate upscaling UX by slightly boosting clarity/contrast
             document.getElementById('adj-c').value = parseInt(document.getElementById('adj-c').value) + 10;
             applyFilters();
-            showToast('Resolution enhanced! (-1 Credit)', 'success');
+            showToast('Resolution enhanced! (Simulated)', 'success');
         }, 1500);
     }
 
@@ -2022,7 +2133,7 @@
     const debouncedPrintUpdate = debounce(triggerPrintUpdate, 300);
 
     // ==========================================
-    // ✨ VERCEL API PROXY INTEGRATIONS
+    // ✨ GEMINI API INTEGRATIONS
     // ==========================================
     
     const TEXT_MODEL = "gemini-2.5-flash-preview-09-2025";
@@ -2049,12 +2160,13 @@
     async function aiAutoConfigExam() {
         const query = document.getElementById('inp-ai-exam').value.trim();
         if(!query) { showToast("Please enter an exam or document name.", "error"); return; }
-        if(!await window.consumeCredit(1)) return;
         
         showLoader('Asking Gemini AI...', 0, `Finding photo rules for ${query}...`);
         
         try {
-            const url = `/api/gemini?model=${TEXT_MODEL}`;
+            const apiKey = "";
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${TEXT_MODEL}:generateContent?key=${apiKey}`;
+            
             const prompt = `You are an expert assistant for a photocopy and cybercafe store. A customer needs a passport-style photo for: "${query}". 
             Determine the official required width and height in millimeters, and the required background color.
             Return ONLY a valid JSON object matching this schema exactly:
@@ -2088,7 +2200,7 @@
                 updateDimensions();
                 if(data.bg) updateBgColor(data.bg);
                 
-                showToast(`✨ ${data.message} (${data.w_mm}x${data.h_mm}mm) (-1 Credit)`);
+                showToast(`✨ ${data.message} (${data.w_mm}x${data.h_mm}mm)`);
                 document.getElementById('inp-ai-exam').value = '';
             } else {
                 throw new Error("Invalid format returned");
@@ -2103,7 +2215,6 @@
 
     async function aiCheckCompliance() {
         if(!state.cropper) { showToast("Upload an image first.", "error"); return; }
-        if(!await window.consumeCredit(1)) return;
         
         showLoader('Analyzing compliance...', 0, "Gemini Vision is checking lighting, pose, and background...");
         
@@ -2111,7 +2222,8 @@
             const base64Image = state.cropper.getCroppedCanvas({ width: 512, height: 512 }).toDataURL('image/jpeg', 0.8);
             const b64Data = base64Image.split(',')[1];
             
-            const url = `/api/gemini?model=${TEXT_MODEL}`;
+            const apiKey = ""; 
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${TEXT_MODEL}:generateContent?key=${apiKey}`;
             
             const prompt = `Act as an expert passport photo verification system. Analyze this cropped photo. 
             Check for 3 things: 
@@ -2150,7 +2262,7 @@
                 hdr.innerHTML = `<i class="ph-fill ph-warning-circle" style="color: var(--error); font-size: 24px;"></i> <span style="font-weight: 600; color: var(--error);">Issues Detected</span>`;
                 list.innerHTML = data.issues.map(i => `<li>${i}</li>`).join('');
             }
-            showToast("Analysis complete! (-1 Credit)");
+            showToast("Analysis complete!");
         } catch (e) {
             console.error(e);
             showToast("AI verification failed.", "error");
@@ -2161,14 +2273,14 @@
         if(!state.cropper) return;
         const outfit = document.getElementById('inp-outfit').value.trim();
         if(!outfit) return;
-        if(!await window.consumeCredit(1)) return;
         
         showLoader('AI Tailoring...', -1, "Gemini is designing your outfit...");
         try {
             const base64Image = state.cropper.getCroppedCanvas({ width: 768, height: 768 }).toDataURL('image/png');
             const b64Data = base64Image.split(',')[1];
             
-            const url = `/api/gemini?model=${IMAGE_MODEL}`;
+            const apiKey = ""; 
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${IMAGE_MODEL}:generateContent?key=${apiKey}`;
             const prompt = `Change clothing to: ${outfit}. Keep face and background exactly identical. High quality portrait.`;
             
             const payload = {
@@ -2181,7 +2293,7 @@
             
             if(generatedB64) {
                 state.cropper.replace(`data:image/png;base64,${generatedB64}`);
-                showToast("Outfit magically updated! (-1 Credit)");
+                showToast("Outfit magically updated!");
             }
         } catch (e) {
             console.error(e);
@@ -2193,11 +2305,11 @@
         const input = document.getElementById('inp-outfit');
         let currentPrompt = input.value.trim();
         if(!currentPrompt) currentPrompt = "Professional formal business attire";
-        if(!await window.consumeCredit(1)) return;
         
         showLoader('Improving prompt...', -1, 'Gemini is adding details...');
         try {
-            const url = `/api/gemini?model=${TEXT_MODEL}`;
+            const apiKey = ""; 
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${TEXT_MODEL}:generateContent?key=${apiKey}`;
             const promptText = `Enhance this clothing description to make it highly detailed, photorealistic, and perfect for an AI image generator (keep it focused on clothing for a portrait). Do not include introductory text, just return the exact prompt: "${currentPrompt}"`;
             
             const payload = { contents: [{ parts: [{ text: promptText }] }] };
@@ -2205,7 +2317,7 @@
             const enhanced = response.candidates[0].content.parts[0].text.trim();
             
             input.value = enhanced.replace(/^["']|["']$/g, '');
-            showToast('Prompt improved! (-1 Credit)');
+            showToast('Prompt improved by Gemini!');
         } catch (e) {
             console.error(e);
             showToast("Failed to improve prompt.", "error");
@@ -2214,27 +2326,22 @@
 
     async function removeBackgroundAPI() {
         if(!state.cropper) return;
-        if(!await window.consumeCredit(1)) return;
-        
+        const apiKey = document.getElementById('inp-api-key').value.trim();
+        if (!apiKey) { showToast("API Key required. See Settings.", "error"); return; }
+
         showLoader('Removing Background...');
         try {
-            const base64Image = state.cropper.getCroppedCanvas().toDataURL('image/png');
-            const b64Data = base64Image.split(',')[1];
-            
-            const response = await fetch('/api/removebg', { 
-                method: 'POST', 
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ image_file_b64: b64Data, size: 'auto' }) 
-            });
-            if (!response.ok) throw new Error("Backend API Error");
+            const inputBlob = await new Promise(r => state.cropper.getCroppedCanvas().toBlob(r, 'image/png'));
+            const formData = new FormData(); formData.append('size', 'auto'); formData.append('image_file', inputBlob);
+            const response = await fetch('https://api.remove.bg/v1.0/removebg', { method: 'POST', headers: { 'X-Api-Key': apiKey }, body: formData });
+            if (!response.ok) throw new Error("Remove.bg Error");
             
             const outBlob = await response.blob();
             state.cropper.replace(URL.createObjectURL(outBlob));
             state.bgRemoved = true;
             updateBgColor('#ffffff');
-            showToast('Background removed! (-1 Credit)');
+            showToast('Background removed!');
         } catch (err) {
-            console.error(err);
             showToast('API failed.', 'error');
         } finally { hideLoader(); triggerCanvasUpdate(); setTimeout(injectFaceGuide, 500); if(!state.isRestoring) debouncedSaveState(); }
     }
@@ -2406,10 +2513,7 @@
         let maxCapacity = maxCols * maxRows;
         
         const hintEl = document.getElementById('max-copies-hint');
-        if(hintEl) {
-            hintEl.textContent = `Max Fits: ${maxCapacity}`;
-            hintEl.dataset.max = maxCapacity; // Store max for "Fill Page" feature
-        }
+        if(hintEl) hintEl.textContent = `Max Fits: ${maxCapacity}`;
         
         let drawQueue = [];
         state.stagedPhotos.forEach(p => { for(let i=0; i < p.copies; i++) drawQueue.push(p.canvas); });
@@ -2444,7 +2548,7 @@
                         ctx.setLineDash([]); ctx.fillStyle = 'rgba(150, 150, 150, 0.4)'; 
                         ctx.font = `${Math.max(6, Math.round(1.1 * PX_PER_MM))}px "Inter", sans-serif`;
                         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-                        ctx.fillText("✂ cut here ✂", x + (photoW_px/2), y - 2);
+                        ctx.fillText("✂ joykumbhakar.netlify.app ✂", x + (photoW_px/2), y - 2);
                     }
                 }
                 drawIndex++;
@@ -2496,31 +2600,20 @@
                 
                 const doc = new jsPDF({ orientation: w_mm>h_mm?'l':'p', unit: 'mm', format: [w_mm, h_mm] });
                 doc.addImage(targetCanvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, w_mm, h_mm, '', 'FAST');
-                const blob = doc.output('blob');
-                
-                downloadBlob(blob, `${name}.pdf`);
+                doc.save(`${name}.pdf`);
                 showToast('PDF Exported Successfully!');
                 recordPrintJob();
-                if(window.uploadToCloudStorage) window.uploadToCloudStorage(blob, `${name}.pdf`);
                 
             } else if(fmt === 'png' || isPrint) {
                 targetCanvas.toBlob(blob => {
                     downloadBlob(blob, `${name}.png`);
                     showToast('Export Successful!');
                     if(isPrint) recordPrintJob();
-                    if(window.uploadToCloudStorage) window.uploadToCloudStorage(blob, `${name}.png`);
                 }, 'image/png', 0.95);
-            } else if (fmt === 'webp') {
-                targetCanvas.toBlob(blob => {
-                    downloadBlob(blob, `${name}.webp`);
-                    showToast('WEBP Export Successful!');
-                    if(window.uploadToCloudStorage) window.uploadToCloudStorage(blob, `${name}.webp`);
-                }, 'image/webp', 0.90);
             } else {
                 const blob = await executeStrictCompression(targetCanvas, maxB, 'image/jpeg');
                 downloadBlob(blob, `${name}.jpg`);
                 showToast(`Optimized to ${(blob.size/1024).toFixed(1)} KB`);
-                if(window.uploadToCloudStorage) window.uploadToCloudStorage(blob, `${name}.jpg`);
             }
         } catch(e) {
             console.error(e); showToast('Export failed.', 'error');
@@ -2582,46 +2675,45 @@
         if (window.innerWidth <= 768 && typeof setDrawerLevel === 'function') setDrawerLevel(1);
     }
 
-    // --- Global Drag and Drop Overlay Logic ---
-    const globalDropzone = document.getElementById('global-dropzone');
-    let dragCounter = 0;
+    // --- Drag and Drop for Home Dropzone ---
+    const dropzone = document.getElementById('home-dropzone');
+    if (dropzone) {
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, preventDefaults, false);
+        });
 
-    window.addEventListener('dragenter', (e) => {
-        e.preventDefault();
-        dragCounter++;
-        if (dragCounter === 1 && !state.isProcessing && window.currentUser) {
-            globalDropzone.classList.add('active');
+        function preventDefaults (e) {
+            e.preventDefault();
+            e.stopPropagation();
         }
-    });
 
-    window.addEventListener('dragleave', (e) => {
-        e.preventDefault();
-        dragCounter--;
-        if (dragCounter === 0) {
-            globalDropzone.classList.remove('active');
-        }
-    });
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropzone.addEventListener(eventName, () => {
+                dropzone.style.borderColor = 'var(--primary)';
+                dropzone.style.background = 'var(--glass-bg-hover)';
+            }, false);
+        });
 
-    window.addEventListener('dragover', (e) => { e.preventDefault(); });
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropzone.addEventListener(eventName, () => {
+                dropzone.style.borderColor = '';
+                dropzone.style.background = '';
+            }, false);
+        });
 
-    window.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dragCounter = 0;
-        globalDropzone.classList.remove('active');
-        
-        if (!window.currentUser) { showToast("Please sign in first.", "error"); return; }
-        if (state.isProcessing) return;
-
-        const files = e.dataTransfer.files;
-        if(files && files.length > 0) {
-            if(files[0].type.startsWith('image/')) {
-                document.getElementById('upInput').files = files;
-                handleUpload({target: {files: files}});
-            } else {
-                showToast("Please drop a valid image file.", "error");
+        dropzone.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            if(files && files.length > 0) {
+                if(files[0].type.startsWith('image/')) {
+                    document.getElementById('upInput').files = files;
+                    handleUpload({target: {files: files}});
+                } else {
+                    showToast("Please drop a valid image file.", "error");
+                }
             }
-        }
-    });
+        }, false);
+    }
 
     // --- Mobile Drawer Logic (3-Level Snap) ---
     const rp = document.getElementById('right-panel');
@@ -2645,7 +2737,7 @@
         state.drawerLevel = Math.max(0, Math.min(2, level));
         
         rp.classList.remove('drawer-collapsed', 'drawer-mid', 'drawer-full');
-        rp.style.transform = ''; 
+        rp.style.transform = ''; // Clear inline styles so CSS classes take over
         
         if (state.drawerLevel === 0) rp.classList.add('drawer-collapsed');
         if (state.drawerLevel === 1) rp.classList.add('drawer-mid');
@@ -2653,6 +2745,7 @@
     }
 
     if (ph && rp) {
+        // Initialize to mid state on load if mobile
         if (isMobileView()) setDrawerLevel(1);
 
         ph.addEventListener('touchstart', (e) => {
@@ -2673,7 +2766,7 @@
             let targetY = initialTranslateY + deltaY;
             
             const levels = getDrawerLevels();
-            targetY = Math.max(0, Math.min(targetY, levels[0])); 
+            targetY = Math.max(0, Math.min(targetY, levels[0])); // Clamp between full and collapsed
             rp.style.transform = `translateY(${targetY}px)`;
         }, {passive: true});
 
@@ -2682,6 +2775,7 @@
             isDraggingPanel = false;
             rp.classList.remove('dragging');
             
+            // Treat as a click if drag distance is tiny
             if (Math.abs(currentY - startY) < 10) {
                 rp.style.transform = '';
                 return; 
@@ -2691,6 +2785,7 @@
             let targetY = initialTranslateY + deltaY;
             const levels = getDrawerLevels();
             
+            // Find closest level to snap to
             let closestLevel = 0;
             let minDiff = Infinity;
             levels.forEach((lY, index) => {
@@ -2701,10 +2796,11 @@
                 }
             });
             
+            // Add momentum snapping based on direction of drag
             if (deltaY > 40 && closestLevel === state.drawerLevel) {
-                closestLevel = Math.max(0, state.drawerLevel - 1); 
+                closestLevel = Math.max(0, state.drawerLevel - 1); // Dragged down
             } else if (deltaY < -40 && closestLevel === state.drawerLevel) {
-                closestLevel = Math.min(2, state.drawerLevel + 1); 
+                closestLevel = Math.min(2, state.drawerLevel + 1); // Dragged up
             }
 
             setDrawerLevel(closestLevel);
@@ -2712,9 +2808,11 @@
 
         ph.addEventListener('click', (e) => {
             if (!isMobileView()) return;
+            // Ignore click if user was just swiping/dragging
             if (Math.abs(currentY - startY) > 10 && currentY !== 0) {
                 currentY = 0; startY = 0; return; 
             }
+            // Cycle through drawer states: Mid -> Full -> Collapsed -> Mid
             let nextLevel = (state.drawerLevel + 1) % 3;
             setDrawerLevel(nextLevel);
             currentY = 0; startY = 0;
