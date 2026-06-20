@@ -740,13 +740,10 @@
         </div>
         <div class="flex-row gap-3 profile-container" style="border-left: 1px solid var(--glass-border); padding-left: 16px; cursor: pointer;">
             <div class="flex-column" style="text-align: right;">
-                <span style="font-weight: 700; font-size: 0.9rem; line-height: 1;">User</span>
-                <span id="user-status" style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Loading <i class="ph-bold ph-caret-down" style="vertical-align: middle;"></i></span>
+                <span style="font-weight: 700; font-size: 0.9rem; line-height: 1;">John Doe</span>
+                <span id="user-status" style="font-size: 0.75rem; color: var(--text-muted); font-weight: 500;">Premium <i class="ph-bold ph-caret-down" style="vertical-align: middle;"></i></span>
             </div>
-            <!-- Fallback generic avatar -->
-            <div style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; background: #fff; color: var(--primary);">
-                <i class="ph-fill ph-user" style="font-size: 24px;"></i>
-            </div>
+            <img src="person.png" alt="Profile" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); object-fit: cover; background: #fff;">
         </div>
     </div>
 </header>
@@ -849,8 +846,10 @@
             <button class="btn-icon" onclick="document.getElementById('settings-modal').classList.remove('active')"><i class="ph-bold ph-x"></i></button>
         </div>
         <div class="modal-body">
-            <!-- Removed the API Key Input because it is now securely stored in Vercel Environment Variables -->
-            <div class="input-group mt-2">
+            <!-- Note: API Key Input was removed because the request is now securely handled on the backend (/api/removebg) -->
+            <p class="text-muted text-sm text-center mb-4">Keys are now securely managed in the server environment.</p>
+
+            <div class="input-group mt-4">
                 <label class="input-label">Primary Color</label>
                 <div class="flex-row gap-4 mt-2">
                     <input type="color" id="inp-theme" value="#4F46E5" style="width: 48px; height: 48px; border:none; background:transparent; cursor:pointer;" onchange="updateThemeColor(this.value)">
@@ -903,15 +902,17 @@
         <!-- Hero Section -->
         <div class="home-hero">
             <div class="hero-content">
-                <span class="welcome-text">Welcome back, User 👋</span>
+                <span class="welcome-text">Welcome back, John <img src="hello.png" alt="Wave" style="width: 20px; height: 20px; display: inline-block; vertical-align: middle; margin-left: 4px; padding-bottom: 2px;"></span>
                 <h2>Perfect Prints. <br><span>Instant Magic.</span></h2>
                 <p>Remove backgrounds, format photos, and create perfect prints in seconds. The ultimate toolkit for Cybercafes.</p>
             </div>
+            <img src="file_00000000e404720b8dbbfbcffb4476cc.png" class="hero-image" alt="Verified Document Illustration">
         </div>
 
         <!-- Primary Action Cards -->
         <div class="home-cards">
             <div class="purple-card" onclick="document.getElementById('upInput').click()">
+                <img src="Import.png" alt="Import Photos">
                 <div class="purple-card-info">
                     <h3>Import Photos</h3>
                     <p>Import photos or files from your device</p>
@@ -919,6 +920,7 @@
                 </div>
             </div>
             <div class="purple-card" onclick="document.getElementById('upCamera').click()">
+                <img src="Create_new.png" alt="Capture New">
                 <div class="purple-card-info">
                     <h3>Capture New</h3>
                     <p>Take a fresh photo directly from camera</p>
@@ -947,7 +949,7 @@
                     <button class="btn-view-all" onclick="showToast('Recent history feature coming soon!')">View All</button>
                 </div>
                 <div class="list-item" onclick="reimportMock()">
-                    <div class="item-icon"><i class="ph-fill ph-user"></i></div>
+                    <img src="person.png" class="item-icon" alt="Profile Picture" style="background: white;">
                     <div class="item-info">
                         <h4>Profile Picture</h4>
                         <p>JPG • 2.4 MB • Just now</p>
@@ -1189,7 +1191,7 @@
                 <button class="btn btn-filled w-100 mb-4" id="btn-rm-bg" onclick="removeBackgroundAPI()">
                     <i class="ph-bold ph-magic-wand"></i> Remove Background (Remove.bg)
                 </button>
-                <div class="helper-text mb-4 text-center">Powered securely via Vercel Edge functions.</div>
+                <div class="helper-text mb-4 text-center">Uses official Remove.bg API handled via edge function.</div>
                 
                 <div id="sec-colors">
                     <div class="input-label mt-4">Studio Gradients <span class="pro-badge">PRO</span></div>
@@ -1623,7 +1625,7 @@
                             const statusEl = document.getElementById('user-status');
                             if (statusEl) {
                                 statusEl.innerHTML = window.currentUserData.isPro 
-                                    ? 'PRO Member <i class="ph-bold ph-caret-down" style="vertical-align: middle;"></i>' 
+                                    ? 'Premium <i class="ph-bold ph-caret-down" style="vertical-align: middle;"></i>' 
                                     : `${window.currentUserData.credits} Credits <i class="ph-bold ph-caret-down" style="vertical-align: middle;"></i>`;
                             }
                             const proBadge = document.querySelector('.pro-badge');
@@ -2257,7 +2259,7 @@
         showLoader('Asking Gemini AI...', 0, `Finding photo rules for ${query}...`);
         
         try {
-            // Target local Vercel endpoint instead of direct Google API
+            // Using the secure Vercel edge function instead of direct API key
             const url = `/api/gemini?model=${TEXT_MODEL}`;
             
             const prompt = `You are an expert assistant for a photocopy and cybercafe store. A customer needs a passport-style photo for: "${query}". 
@@ -2316,7 +2318,7 @@
             const base64Image = state.cropper.getCroppedCanvas({ width: 512, height: 512 }).toDataURL('image/jpeg', 0.8);
             const b64Data = base64Image.split(',')[1];
             
-            // Target local Vercel endpoint instead of direct Google API
+            // Using the secure Vercel edge function
             const url = `/api/gemini?model=${TEXT_MODEL}`;
             
             const prompt = `Act as an expert passport photo verification system. Analyze this cropped photo. 
@@ -2374,7 +2376,7 @@
             const base64Image = state.cropper.getCroppedCanvas({ width: 768, height: 768 }).toDataURL('image/png');
             const b64Data = base64Image.split(',')[1];
             
-            // Target local Vercel endpoint instead of direct Google API
+            // Using the secure Vercel edge function
             const url = `/api/gemini?model=${IMAGE_MODEL}`;
             const prompt = `Change clothing to: ${outfit}. Keep face and background exactly identical. High quality portrait.`;
             
@@ -2403,7 +2405,7 @@
         
         showLoader('Improving prompt...', -1, 'Gemini is adding details...');
         try {
-            // Target local Vercel endpoint instead of direct Google API
+            // Using the secure Vercel edge function
             const url = `/api/gemini?model=${TEXT_MODEL}`;
             const promptText = `Enhance this clothing description to make it highly detailed, photorealistic, and perfect for an AI image generator (keep it focused on clothing for a portrait). Do not include introductory text, just return the exact prompt: "${currentPrompt}"`;
             
@@ -2427,7 +2429,7 @@
         try {
             const inputBlob = await new Promise(r => state.cropper.getCroppedCanvas().toBlob(r, 'image/png'));
             
-            // Convert Blob to Base64 to match the Node.js backend expectation (JSON body)
+            // Convert Blob to Base64 to match the Node.js backend expectation
             const base64Data = await new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.onloadend = () => resolve(reader.result.split(',')[1]);
@@ -2436,7 +2438,7 @@
             
             const payload = { image_file_b64: base64Data, size: 'auto' };
             
-            // Send JSON request to your Vercel Node API endpoint
+            // Fetch via secure Vercel proxy route
             const response = await fetch('/api/removebg', { 
                 method: 'POST', 
                 headers: { 'Content-Type': 'application/json' }, 
