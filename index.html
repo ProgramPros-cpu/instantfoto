@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocuCraft | Liquid Document Suite</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2991/2991148.png">
+    
+    <!-- Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- LIQUID THEME ENGINE --- */
+        :root {
+            /* Light Mode Variables */
+            --bg-color: #f3f4f6;
+            --text-main: #111827;
+            --text-muted: rgba(0, 0, 0, 0.7);
+            
+            /* Liquid Glass Variables */
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.8);
+            --glass-highlight: rgba(255, 255, 255, 0.95);
+            --glass-blur: 50px;
+            --glass-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05), inset 0 0 20px rgba(255, 255, 255, 0.5);
+            
+            --accent-glow: rgba(0, 0, 0, 0.05);
+
+            /* Gradient Definitions */
+            --gradient-start: #2563eb;
+            --gradient-end: #0f172a;
+            
+            /* Blobs */
+            --blob-1: #c7d2fe; /* Indigo */
+            --blob-2: #bae6fd; /* Sky */
+            --blob-3: #e9d5ff; /* Purple */
+            
+            /* Emboss Shadows */
+            --emboss-light: rgba(255,255,255,0.9);
+            --emboss-dark: rgba(0,0,0,0.2);
+        }
+
+        /* Dark Mode Override */
+        body.dark-mode {
+            --bg-color: #050505;
+            --text-main: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.6);
+            
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-highlight: rgba(255, 255, 255, 0.15);
+            --glass-blur: 50px;
+            --glass-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 0, 0, 0.2);
+            
+            --accent-glow: rgba(255, 255, 255, 0.1);
+
+            --gradient-start: #3b82f6;
+            --gradient-end: #a855f7;
+            
+            --blob-1: #1e40af;
+            --blob-2: #3730a3;
+            --blob-3: #0f766e;
+
+            --emboss-light: rgba(255,255,255,0.1);
+            --emboss-dark: rgba(0,0,0,0.5);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: background-color 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        /* --- LIQUID BACKGROUND BLOBS --- */
+        .liquid-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; overflow: hidden; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.6; animation: morph 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1); will-change: transform, border-radius; }
+        body.dark-mode .blob { opacity: 0.4; }
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: var(--blob-1); animation-delay: 0s; }
+        .blob-2 { bottom: -10%; right: -10%; width: 50vw; height: 50vw; background: var(--blob-2); animation-delay: -5s; }
+        .blob-3 { top: 40%; left: 40%; width: 40vw; height: 40vw; background: var(--blob-3); animation-delay: -10s; opacity: 0.4; }
+        
+        @keyframes morph {
+            0% { transform: translate(0, 0) scale(1); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            33% { transform: translate(30px, -50px) scale(1.1); border-radius: 50% 50% 20% 80% / 25% 80% 20% 75%; }
+            66% { transform: translate(-20px, 20px) scale(0.9); border-radius: 67% 33% 47% 53% / 37% 59% 41% 63%; }
+            100% { transform: translate(0, 0) scale(1); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        /* --- GLOBAL UTILS --- */
+        .grad-text { background: linear-gradient(135deg, var(--gradient-start) 30%, var(--gradient-end) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: inline-block; font-weight: 900; }
+        .emboss-3d { filter: drop-shadow(-2px -2px 4px var(--emboss-light)) drop-shadow(2px 2px 4px var(--emboss-dark)); }
+        
+        /* --- GLASS PANELS --- */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+            -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid var(--glass-highlight);
+            border-left: 1px solid var(--glass-highlight);
+            box-shadow: var(--glass-shadow);
+            border-radius: 2rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .glass-interactive:hover {
+            transform: translateY(-8px) scale(1.01);
+            background: linear-gradient(135deg, var(--glass-bg), var(--accent-glow));
+            border-color: var(--text-main);
+            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.15), inset 0 0 30px rgba(255, 255, 255, 0.7);
+            z-index: 10;
+        }
+        body.dark-mode .glass-interactive:hover { box-shadow: 0 30px 60px -12px rgba(0,0,0,0.4), inset 0 0 30px rgba(0, 0, 0, 0.4); }
+
+        /* --- BUTTONS --- */
+        .btn-solid {
+            background: linear-gradient(135deg, var(--text-main), var(--text-muted));
+            color: var(--bg-color);
+            border: none;
+            box-shadow: 0 10px 20px -10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-weight: 800;
+        }
+        .btn-solid:hover { transform: translateY(-3px); box-shadow: 0 15px 30px -10px rgba(0,0,0,0.3); }
+        .btn-solid:active { transform: translateY(-1px); }
+
+        .scan-line {
+            position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--text-main); box-shadow: 0 0 10px var(--text-main); opacity: 0.5;
+            animation: scan 3s ease-in-out infinite;
+        }
+        @keyframes scan { 0%, 100% { top: 0; opacity: 0; } 50% { top: 100%; opacity: 1; } }
+
+        /* Icon Animation */
+        .feature-icon { transition: transform 0.4s ease, box-shadow 0.4s ease; }
+        .glass-interactive:hover .feature-icon { transform: scale(1.1) rotate(5deg); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+    </style>
+</head>
+<body class="antialiased h-screen flex flex-col relative">
+
+    <!-- Global SVG Gradient -->
+    <svg width="0" height="0" class="absolute">
+        <defs>
+            <linearGradient id="icon-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" class="stop-color-1" stop-color="var(--gradient-start)" />
+                <stop offset="100%" class="stop-color-2" stop-color="var(--gradient-end)" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Liquid Background -->
+    <div class="liquid-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div style="position: absolute; inset:0; background: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' opacity=\'0.06\'/%3E%3C/svg%3E'); opacity:0.4; mix-blend-mode: overlay;"></div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto relative z-10 px-4 md:px-8 pt-4 md:pt-8 pb-12 max-w-7xl mx-auto w-full scroll-smooth">
+        
+        <!-- Header -->
+        <header class="flex items-center justify-between mb-12 fade-enter-active px-2">
+            <div class="flex items-center gap-4 group cursor-pointer">
+                <div class="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center shadow-xl relative overflow-hidden backdrop-blur-xl emboss-3d transition-transform duration-300 hover:scale-105"> 
+                    <div class="scan-line"></div>
+                    <i data-lucide="layers" class="w-7 h-7 md:w-8 md:h-8 text-indigo-600 dark:text-indigo-400"></i>
+                </div>
+                <div>
+                    <h3 class="font-black text-xl md:text-2xl leading-none grad-text">DocuCraft</h3>
+                </div>
+            </div>
+
+            <!-- Theme Toggle -->
+            <button onclick="toggleThemeManual()" class="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center border border-white/10 bg-white/10 hover:bg-white/20 shadow-md emboss-3d transition-all active:scale-95">
+                <i data-lucide="sun" class="w-5 h-5 hidden dark-icon"></i>
+                <i data-lucide="moon" class="w-5 h-5 light-icon"></i>
+            </button>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="text-center mb-16 md:mb-24 px-4">
+            <h1 class="text-4xl md:text-7xl font-black tracking-tighter mb-6 leading-[0.9]">
+                <span class="grad-text">Craft Professional</span><br>
+                <span class="text-muted font-bold opacity-60 text-3xl md:text-6xl">Documents in Seconds.</span>
+            </h1>
+        </section>
+
+        <!-- Tools Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 pb-20">
+            
+            <!-- 1. Family Tree -->
+            <a href="familytreebuilder.html" class="glass-panel glass-interactive p-8 flex flex-col group h-full">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-emerald-500/10 backdrop-blur-xl flex items-center justify-center border border-emerald-500/20 emboss-3d">
+                        <i data-lucide="git-fork" class="w-8 h-8 text-emerald-600 dark:text-emerald-400"></i>
+                    </div>
+                    <span class="text-[10px] font-black uppercase tracking-widest bg-emerald-500/10 text-emerald-600 px-3 py-1 rounded-full">Visual</span>
+                </div>
+                <h3 class="text-2xl font-black mb-3 grad-text">Family Tree</h3>
+                <p class="text-sm text-muted font-medium leading-relaxed mb-8 flex-grow">Map your ancestry with our visual hierarchy builder. Add photos, details, and export high-quality images.</p>
+                <div class="mt-auto pt-4 border-t border-white/10 flex items-center justify-between text-emerald-600 dark:text-emerald-400 font-bold text-sm">
+                    <span>Launch Builder</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- 2. ID Card -->
+            <a href="idcardbuilder.html" class="glass-panel glass-interactive p-8 flex flex-col group h-full">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-blue-500/10 backdrop-blur-xl flex items-center justify-center border border-blue-500/20 emboss-3d">
+                        <i data-lucide="credit-card" class="w-8 h-8 text-blue-600 dark:text-blue-400"></i>
+                    </div>
+                    <span class="text-[10px] font-black uppercase tracking-widest bg-blue-500/10 text-blue-600 px-3 py-1 rounded-full">Identity</span>
+                </div>
+                <h3 class="text-2xl font-black mb-3 grad-text">ID Card Creator</h3>
+                <p class="text-sm text-muted font-medium leading-relaxed mb-8 flex-grow">Design professional identification cards with barcodes, QR codes, and custom vector backgrounds.</p>
+                <div class="mt-auto pt-4 border-t border-white/10 flex items-center justify-between text-blue-600 dark:text-blue-400 font-bold text-sm">
+                    <span>Launch Creator</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- 3. Resume Builder -->
+            <a href="resumebuilder.html" class="glass-panel glass-interactive p-8 flex flex-col group h-full">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-rose-500/10 backdrop-blur-xl flex items-center justify-center border border-rose-500/20 emboss-3d">
+                        <i data-lucide="file-text" class="w-8 h-8 text-rose-600 dark:text-rose-400"></i>
+                    </div>
+                    <span class="text-[10px] font-black uppercase tracking-widest bg-rose-500/10 text-rose-600 px-3 py-1 rounded-full">Career</span>
+                </div>
+                <h3 class="text-2xl font-black mb-3 grad-text">Resume Builder</h3>
+                <p class="text-sm text-muted font-medium leading-relaxed mb-8 flex-grow">Build ATS-friendly resumes. Choose from modern templates and download as PDF instantly.</p>
+                <div class="mt-auto pt-4 border-t border-white/10 flex items-center justify-between text-rose-600 dark:text-rose-400 font-bold text-sm">
+                    <span>Start Building</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- 4. BioData Maker -->
+            <a href="biodatabuilder.html" class="glass-panel glass-interactive p-8 flex flex-col group h-full">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-fuchsia-500/10 backdrop-blur-xl flex items-center justify-center border border-fuchsia-500/20 emboss-3d">
+                        <i data-lucide="user-cog" class="w-8 h-8 text-fuchsia-600 dark:text-fuchsia-400"></i>
+                    </div>
+                    <span class="text-[10px] font-black uppercase tracking-widest bg-fuchsia-500/10 text-fuchsia-600 px-3 py-1 rounded-full">Profile</span>
+                </div>
+                <h3 class="text-2xl font-black mb-3 grad-text">BioData Maker</h3>
+                <p class="text-sm text-muted font-medium leading-relaxed mb-8 flex-grow">Create detailed personal profiles for matrimonial or official purposes with structured layouts.</p>
+                <div class="mt-auto pt-4 border-t border-white/10 flex items-center justify-between text-fuchsia-600 dark:text-fuchsia-400 font-bold text-sm">
+                    <span>Create Profile</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- 5. Gov Photo Tool -->
+            <a href="photo_tool.html" class="glass-panel glass-interactive p-8 flex flex-col group h-full">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-orange-500/10 backdrop-blur-xl flex items-center justify-center border border-orange-500/20 emboss-3d">
+                        <i data-lucide="crop" class="w-8 h-8 text-orange-600 dark:text-orange-400"></i>
+                    </div>
+                    <span class="text-[10px] font-black uppercase tracking-widest bg-orange-500/10 text-orange-600 px-3 py-1 rounded-full">Utility</span>
+                </div>
+                <h3 class="text-2xl font-black mb-3 grad-text">Gov Photo Pro</h3>
+                <p class="text-sm text-muted font-medium leading-relaxed mb-8 flex-grow">Official photo resizer for ECI, PAN, and UPSC exams. Auto-crop, smart filters, and compression.</p>
+                <div class="mt-auto pt-4 border-t border-white/10 flex items-center justify-between text-orange-600 dark:text-orange-400 font-bold text-sm">
+                    <span>Open Tool</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+            <!-- 6. Certificate Studio (NEW) -->
+            <a href="certificate_tool.html" class="glass-panel glass-interactive p-8 flex flex-col group h-full">
+                <div class="flex justify-between items-start mb-6">
+                    <div class="feature-icon w-16 h-16 rounded-2xl bg-yellow-500/10 backdrop-blur-xl flex items-center justify-center border border-yellow-500/20 emboss-3d">
+                        <i data-lucide="award" class="w-8 h-8 text-yellow-600 dark:text-yellow-400"></i>
+                    </div>
+                    <span class="text-[10px] font-black uppercase tracking-widest bg-yellow-500/10 text-yellow-600 px-3 py-1 rounded-full">Awards</span>
+                </div>
+                <h3 class="text-2xl font-black mb-3 grad-text">Certificate Studio</h3>
+                <p class="text-sm text-muted font-medium leading-relaxed mb-8 flex-grow">Create official-looking certificates with security patterns, micro-text, and holographic seals.</p>
+                <div class="mt-auto pt-4 border-t border-white/10 flex items-center justify-between text-yellow-600 dark:text-yellow-400 font-bold text-sm">
+                    <span>Open Studio</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="text-center pb-8 opacity-60">
+            <p class="text-xs text-muted font-bold uppercase tracking-widest">&copy; 2025 DocuCraft Suite. Verified Build.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // --- THEME ENGINE ---
+        const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function handleThemeChange(e) {
+            if (e.matches) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+            updateIcons();
+        }
+
+        // Manual Toggle
+        function toggleThemeManual() {
+            document.body.classList.toggle('dark-mode');
+            updateIcons();
+        }
+
+        function updateIcons() {
+            const isDark = document.body.classList.contains('dark-mode');
+            document.querySelector('.light-icon').classList.toggle('hidden', !isDark);
+            document.querySelector('.dark-icon').classList.toggle('hidden', isDark);
+            
+            const root = getComputedStyle(document.body);
+            const start = root.getPropertyValue('--gradient-start').trim();
+            const end = root.getPropertyValue('--gradient-end').trim();
+            
+            const stop1 = document.querySelector('.stop-color-1');
+            const stop2 = document.querySelector('.stop-color-2');
+            
+            if(stop1) stop1.setAttribute('stop-color', start);
+            if(stop2) stop2.setAttribute('stop-color', end);
+        }
+
+        function applyGradientToIcons() {
+            // Apply gradient stroke to all icons except those with specific colors
+            setTimeout(() => {
+                document.querySelectorAll('.lucide').forEach(icon => {
+                    // Check if icon is inside a feature-icon container which usually has specific colors
+                    if(!icon.closest('.feature-icon')) {
+                         icon.style.stroke = "url(#icon-gradient)";
+                    }
+                });
+            }, 50);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            
+            // Theme Init
+            handleThemeChange(darkModeMediaQuery);
+            darkModeMediaQuery.addListener(handleThemeChange);
+            
+            // Observer for dynamic icons
+            const observer = new MutationObserver(() => {
+                applyGradientToIcons();
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+            applyGradientToIcons();
+        });
+    </script>
+</body>
+</html>
